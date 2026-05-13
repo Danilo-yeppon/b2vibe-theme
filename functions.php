@@ -116,3 +116,63 @@ function b2vibe_register_meta(): void
 	}
 }
 add_action('init', 'b2vibe_register_meta');
+
+/**
+ * GitHub Theme Updater — checks for new versions on GitHub
+ */
+function b2vibe_github_updater(array $transient): array
+{
+	if (empty($transient['checked'])) {
+		return $transient;
+	}
+
+	$repo  = 'Danilo-yeppon/b2vibe-theme';
+	$theme = 'b2vibe';
+
+	$response = wp_remote_get("https://api.github.com/repos/{$repo}/releases/latest", [
+		'headers' => ['Accept' => 'application/vnd.github.v3+json'],
+		'timeout' => 10,
+	]);
+
+	if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+		return $transient;
+	}
+
+	$release = json_decode(wp_remote_retrieve_body($response), true);
+	if (empty($release['tag_name'])) {
+		return $transient;
+	}
+
+	$new_version = ltrim($release['tag_name'], 'v');
+	$current     = $transient['checked'][$theme] ?? B2VIBE_VERSION;
+
+	if (version_compare($new_version, $current, '>')) {
+		$transient['response'][$theme] = [
+			'theme'       => $theme,
+			'new_version' => $new_version,
+			'url'         => "https://github.com/{$repo}",
+			'package'     => $release['zipball_url'] ?? "https://api.github.com/repos/{$repo}/zipball/{$release['tag_name']}",
+		];
+	}
+
+	return $transient;
+}
+add_filter('site_transient_update_themes', 'b2vibe_github_updater');
+
+/**
+ * Fix GitHub ZIP folder name (removes commit hash suffix)
+ */
+function b2vibe_upgrader_source(string $source, string $remote_source, $upgrader): string
+{
+	if (! isset($upgrader->skin->theme_info) || $upgrader->skin->theme_info->get('Name') !== 'B2Vibe') {
+		return $source;
+	}
+
+	$corrected = trailingslashit($remote_source) . 'b2vibe/';
+	if ($source !== $corrected) {
+		rename($source, $corrected);
+	}
+
+	return $corrected;
+}
+add_filter('upgrader_source_selection', 'b2vibe_upgrader_source', 10, 3);
