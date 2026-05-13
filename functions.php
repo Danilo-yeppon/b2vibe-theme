@@ -102,3 +102,17 @@ function b2vibe_excerpt_more(): string
 	return '&hellip;';
 }
 add_filter('excerpt_more', 'b2vibe_excerpt_more');
+
+function b2vibe_register_meta(): void
+{
+	$meta_keys = ['b2v_service_label', 'b2v_service_intro', 'b2v_service_features', 'b2v_service_benefits'];
+	foreach ($meta_keys as $key) {
+		register_post_meta('page', $key, [
+			'show_in_rest'  => true,
+			'single'        => true,
+			'type'          => 'string',
+			'auth_callback' => static fn(): bool => current_user_can('edit_posts'),
+		]);
+	}
+}
+add_action('init', 'b2vibe_register_meta');
