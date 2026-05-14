@@ -120,9 +120,13 @@ add_action('init', 'b2vibe_register_meta');
 /**
  * GitHub Theme Updater — checks for new versions on GitHub
  */
-function b2vibe_github_updater(array $transient): array
+function b2vibe_github_updater($transient)
 {
-	if (empty($transient['checked'])) {
+	if (! is_object($transient)) {
+		return $transient;
+	}
+
+	if (empty($transient->checked)) {
 		return $transient;
 	}
 
@@ -144,10 +148,10 @@ function b2vibe_github_updater(array $transient): array
 	}
 
 	$new_version = ltrim($release['tag_name'], 'v');
-	$current     = $transient['checked'][$theme] ?? B2VIBE_VERSION;
+	$current     = $transient->checked[$theme] ?? B2VIBE_VERSION;
 
 	if (version_compare($new_version, $current, '>')) {
-		$transient['response'][$theme] = [
+		$transient->response[$theme] = [
 			'theme'       => $theme,
 			'new_version' => $new_version,
 			'url'         => "https://github.com/{$repo}",
@@ -164,12 +168,17 @@ add_filter('site_transient_update_themes', 'b2vibe_github_updater');
  */
 function b2vibe_upgrader_source(string $source, string $remote_source, $upgrader): string
 {
-	if (! isset($upgrader->skin->theme_info) || $upgrader->skin->theme_info->get('Name') !== 'B2Vibe') {
+	if (! isset($upgrader->skin) || ! is_object($upgrader->skin)) {
+		return $source;
+	}
+
+	$theme_info = $upgrader->skin->theme_info ?? null;
+	if (! $theme_info || ! is_object($theme_info) || $theme_info->get('Name') !== 'B2Vibe') {
 		return $source;
 	}
 
 	$corrected = trailingslashit($remote_source) . 'b2vibe/';
-	if ($source !== $corrected) {
+	if ($source !== $corrected && is_dir($source)) {
 		rename($source, $corrected);
 	}
 
