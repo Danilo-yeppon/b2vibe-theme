@@ -63,7 +63,7 @@ get_header();
 
 <!-- 3. LA NOSTRA STORIA -->
 <section class="b2v-section b2v-problema" id="storia">
-	<div class="b2v-container b2v-problema__inner">
+	<div class="b2v-container">
 		<span class="b2v-label"><?php esc_html_e('La nostra storia', 'b2vibe'); ?></span>
 		<h2><?php esc_html_e('Da Yeppon a B2Vibe: 15 anni di ecommerce, ora al servizio del tuo brand.', 'b2vibe'); ?></h2>
 		<p>

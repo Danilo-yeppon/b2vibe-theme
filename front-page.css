@@ -143,13 +143,10 @@
 	100% { transform: translateX(-50%); }
 }
 
-/* --- 3. IL PROBLEMA --- */
+/* --- 3. LA NOSTRA STORIA --- */
 .b2v-problema {
 	background-color: var(--b2v-bg-alt);
-}
-
-.b2v-problema__inner {
-	max-width: 800px;
+	padding-bottom: 40px;
 }
 
 .b2v-problema__inner h2 {
@@ -160,17 +157,16 @@
 	color: var(--b2v-text-muted);
 	font-size: 1.0625rem;
 	line-height: 1.7;
-	max-width: 600px;
 }
 
 /* --- 4. A CHI CI RIVOLGIAMO --- */
 .b2v-target {
 	background-color: var(--b2v-bg-alt);
+	padding-top: 40px;
 }
 
 .b2v-target h2 {
 	margin-bottom: 16px;
-	max-width: 700px;
 }
 
 .b2v-target > .b2v-container > p {
