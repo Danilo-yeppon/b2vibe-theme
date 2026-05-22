@@ -23,7 +23,7 @@ get_header();
 		</h1>
 
 		<p class="b2v-hero__sub">
-			<?php esc_html_e('Gestiamo la complessit&agrave; dell\'ecommerce multicanale &mdash; amministrazione, fiscalit&agrave;, logistica e customer care &mdash; generando entrate costanti cos&igrave; la tua azienda pu&ograve; scalare focalizzandosi sul proprio brand.', 'b2vibe'); ?>
+			<?php esc_html_e('Nati da 15+ anni di esperienza Yeppon e oltre 1 milione di ordini spediti in Europa. Oggi mettiamo questa competenza al servizio del tuo brand, gestendo ecommerce multicanale, logistica, fiscalit&agrave; e customer care.', 'b2vibe'); ?>
 		</p>
 
 		<div class="b2v-hero__actions">
@@ -61,14 +61,38 @@ get_header();
 	</div>
 </div>
 
-<!-- 3. IL PROBLEMA -->
-<section class="b2v-section b2v-problema" id="problema">
+<!-- 3. LA NOSTRA STORIA -->
+<section class="b2v-section b2v-problema" id="storia">
 	<div class="b2v-container b2v-problema__inner">
-		<span class="b2v-label"><?php esc_html_e('Il problema', 'b2vibe'); ?></span>
-		<h2><?php esc_html_e('Vendere online &egrave; complesso. Gestire la complessit&agrave; &egrave; il nostro lavoro.', 'b2vibe'); ?></h2>
+		<span class="b2v-label"><?php esc_html_e('La nostra storia', 'b2vibe'); ?></span>
+		<h2><?php esc_html_e('Da Yeppon a B2Vibe: 15 anni di ecommerce, ora al servizio del tuo brand.', 'b2vibe'); ?></h2>
 		<p>
-			<?php esc_html_e('Le aziende che vogliono crescere sui marketplace europei si scontrano ogni giorno con ostacoli operativi che rallentano e consumano risorse: IVA estera, logistica frammentata, compliance e customer care multilingua.', 'b2vibe'); ?>
+			<?php esc_html_e('B2Vibe nasce da una costola di Yeppon, uno dei principali ecommerce italiani. In oltre 15 anni abbiamo spedito pi&ugrave; di 1 milione di ordini in tutta Europa, affrontando ogni sfida operativa: logistica, fiscalit&agrave; internazionale, compliance e customer care multilingua. Oggi mettiamo tutta questa esperienza al servizio di altre aziende che vogliono vendere online senza reinventare la ruota.', 'b2vibe'); ?>
 		</p>
+	</div>
+</section>
+
+<!-- 3b. I NUMERI -->
+<section class="b2v-section b2v-stats" id="numeri">
+	<div class="b2v-container">
+		<div class="b2v-stats__grid">
+			<div class="b2v-stats__item">
+				<span class="b2v-stats__number">15+</span>
+				<span class="b2v-stats__label"><?php esc_html_e('Anni di esperienza', 'b2vibe'); ?></span>
+			</div>
+			<div class="b2v-stats__item">
+				<span class="b2v-stats__number">1M+</span>
+				<span class="b2v-stats__label"><?php esc_html_e('Ordini spediti in Europa', 'b2vibe'); ?></span>
+			</div>
+			<div class="b2v-stats__item">
+				<span class="b2v-stats__number">10+</span>
+				<span class="b2v-stats__label"><?php esc_html_e('Marketplace gestiti', 'b2vibe'); ?></span>
+			</div>
+			<div class="b2v-stats__item">
+				<span class="b2v-stats__number">5</span>
+				<span class="b2v-stats__label"><?php esc_html_e('Lingue di assistenza', 'b2vibe'); ?></span>
+			</div>
+		</div>
 	</div>
 </section>
 
