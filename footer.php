@@ -3,7 +3,7 @@
 		<div class="b2v-footer__grid">
 			<div class="b2v-footer__brand">
 				<a href="<?php echo esc_url(home_url('/')); ?>" class="b2v-logo">
-						<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/logo-b2vibe.svg'); ?>" alt="B2Vibe" class="b2v-logo__img" width="160" height="24">
+						<img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/logo-b2vibe.png'); ?>" alt="B2Vibe" class="b2v-logo__img" width="160" height="24">
 					</a>
 				<p><?php esc_html_e('E-commerce Full Outsourcing & Merchant of Record. Gestiamo la complessit&agrave; per far crescere il tuo brand.', 'b2vibe'); ?></p>
 			</div>

@@ -15,7 +15,7 @@
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
 				<img
-					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/logo-b2vibe.svg'); ?>"
+					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/logo-b2vibe.png'); ?>"
 					alt="B2Vibe"
 					class="b2v-logo__img"
 					width="160"
