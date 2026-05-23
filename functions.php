@@ -118,9 +118,18 @@ function b2vibe_remove_block_css(): void
 	wp_dequeue_style('wp-block-library-theme');
 	wp_dequeue_style('wc-blocks-style');
 	wp_dequeue_style('global-styles');
+	wp_dequeue_style('global-styles-inline');
 	wp_dequeue_style('classic-theme-styles');
+	wp_dequeue_style('core-block-supports');
 }
 add_action('wp_enqueue_scripts', 'b2vibe_remove_block_css', 100);
+
+/**
+ * Performance: Remove WP global styles and SVG filters (saves ~8 KB inline CSS).
+ */
+remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
+remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
 
 /**
  * Performance: Add preconnect for Google Fonts & swap dns-prefetch.
