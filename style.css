@@ -304,12 +304,26 @@ h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 700; }
 	color: var(--b2v-text);
 }
 
+.b2v-footer__legal {
+	padding-top: 24px;
+	margin-top: 8px;
+	border-top: 1px solid var(--b2v-border);
+	font-size: 0.75rem;
+	color: var(--b2v-text-dim);
+	line-height: 1.7;
+	opacity: 0.6;
+}
+
+.b2v-footer__legal p + p {
+	margin-top: 2px;
+}
+
 .b2v-footer__bottom {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	padding-top: 24px;
-	border-top: 1px solid var(--b2v-border);
+	padding-top: 16px;
+	margin-top: 16px;
 	font-size: 0.8125rem;
 	color: var(--b2v-text-dim);
 }

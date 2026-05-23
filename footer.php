@@ -33,14 +33,19 @@
 				<h4><?php esc_html_e('Contatti', 'b2vibe'); ?></h4>
 				<ul>
 					<li><a href="mailto:info@b2vibe.com">info@b2vibe.com</a></li>
-					<li><span class="b2v-text-muted"><?php esc_html_e('Paderno Dugnano (MB)', 'b2vibe'); ?></span></li>
+					<li><span class="b2v-text-muted">Sede Operativa: Via Santi 11/13</span></li>
+					<li><span class="b2v-text-muted">20037 Paderno Dugnano (MI)</span></li>
 				</ul>
 			</div>
 		</div>
 
+		<div class="b2v-footer__legal">
+			<p>B2VIBE S.r.l. &mdash; Sede Legale: Via Paradiso, 5 &ndash; 20831 Seregno (MB) &mdash; REA: MB &ndash; 2767890</p>
+			<p>P.IVA 14234560960 &mdash; Codice Univoco: SUBM70N &mdash; Capitale sociale &euro; 1.000.000</p>
+		</div>
+
 		<div class="b2v-footer__bottom">
-			<span>&copy; <?php echo esc_html(date('Y')); ?> B2Vibe. <?php esc_html_e('Tutti i diritti riservati.', 'b2vibe'); ?></span>
-			<span>P.IVA IT00000000000</span>
+			<span>&copy; <?php echo esc_html(date('Y')); ?> B2VIBE S.r.l. <?php esc_html_e('Tutti i diritti riservati.', 'b2vibe'); ?></span>
 		</div>
 	</div>
 </footer>
