@@ -3,6 +3,7 @@
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#0a0a0a">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -15,11 +16,13 @@
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
 				<img
-					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/logo-b2vibe.png'); ?>"
+					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/logo-b2vibe.svg'); ?>"
 					alt="B2Vibe"
 					class="b2v-logo__img"
 					width="160"
 					height="24"
+					fetchpriority="high"
+					decoding="async"
 				>
 			<?php endif; ?>
 		</a>

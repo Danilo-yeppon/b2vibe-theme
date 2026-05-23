@@ -74,8 +74,83 @@ function b2vibe_enqueue_assets(): void
 		B2VIBE_VERSION,
 		true
 	);
+
+	// Load CF7 assets only on the contact page
+	if (! is_page('prenota-una-call')) {
+		wp_dequeue_style('contact-form-7');
+		wp_dequeue_script('contact-form-7');
+		wp_dequeue_script('wpcf7-recaptcha');
+		wp_dequeue_script('google-recaptcha');
+	}
 }
-add_action('wp_enqueue_scripts', 'b2vibe_enqueue_assets');
+add_action('wp_enqueue_scripts', 'b2vibe_enqueue_assets', 20);
+
+/**
+ * Performance: Remove WordPress emoji scripts & styles (saves ~15 KB).
+ */
+function b2vibe_disable_emojis(): void
+{
+	remove_action('wp_head', 'print_emoji_detection_script', 7);
+	remove_action('wp_print_styles', 'print_emoji_styles');
+	remove_action('admin_print_scripts', 'print_emoji_detection_script');
+	remove_action('admin_print_styles', 'print_emoji_styles');
+	remove_filter('the_content_feed', 'wp_staticize_emoji');
+	remove_filter('comment_text_rss', 'wp_staticize_emoji');
+	remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+	add_filter('tiny_mce_plugins', static function (array $plugins): array {
+		return array_diff($plugins, ['wpemoji']);
+	});
+	add_filter('wp_resource_hints', static function (array $urls, string $relation): array {
+		if ($relation === 'dns-prefetch') {
+			$urls = array_filter($urls, static fn($url) => ! str_contains((string) $url, 'twemoji'));
+		}
+		return $urls;
+	}, 10, 2);
+}
+add_action('init', 'b2vibe_disable_emojis');
+
+/**
+ * Performance: Remove Gutenberg block CSS on front-end (saves ~30 KB).
+ */
+function b2vibe_remove_block_css(): void
+{
+	wp_dequeue_style('wp-block-library');
+	wp_dequeue_style('wp-block-library-theme');
+	wp_dequeue_style('wc-blocks-style');
+	wp_dequeue_style('global-styles');
+	wp_dequeue_style('classic-theme-styles');
+}
+add_action('wp_enqueue_scripts', 'b2vibe_remove_block_css', 100);
+
+/**
+ * Performance: Add preconnect for Google Fonts & swap dns-prefetch.
+ */
+function b2vibe_resource_hints(): void
+{
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>' . "\n";
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}
+add_action('wp_head', 'b2vibe_resource_hints', 1);
+
+/**
+ * Performance: Remove WP version meta, shortlink, REST link, oEmbed, RSD, wlwmanifest.
+ */
+function b2vibe_clean_head(): void
+{
+	remove_action('wp_head', 'wp_generator');
+	remove_action('wp_head', 'wp_shortlink_wp_head');
+	remove_action('wp_head', 'rest_output_link_wp_head');
+	remove_action('wp_head', 'wp_oembed_add_discovery_links');
+	remove_action('wp_head', 'rsd_link');
+	remove_action('wp_head', 'wlwmanifest_link');
+	remove_action('wp_head', 'feed_links_extra', 3);
+}
+add_action('after_setup_theme', 'b2vibe_clean_head');
+
+/**
+ * Performance: Remove DNS prefetch for WordPress.org (s.w.org).
+ */
+add_filter('emoji_svg_url', '__return_false');
 
 function b2vibe_nav_menu_css_class(array $classes): array
 {

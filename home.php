@@ -29,7 +29,7 @@ get_header();
 					<article class="b2v-post-card">
 						<?php if (has_post_thumbnail()) : ?>
 							<a href="<?php the_permalink(); ?>" class="b2v-post-card__thumb" aria-hidden="true">
-								<?php the_post_thumbnail('medium_large'); ?>
+								<?php the_post_thumbnail('medium_large', ['loading' => 'lazy', 'decoding' => 'async']); ?>
 							</a>
 						<?php else : ?>
 							<a href="<?php the_permalink(); ?>" class="b2v-post-card__thumb b2v-post-card__thumb--placeholder" aria-hidden="true">

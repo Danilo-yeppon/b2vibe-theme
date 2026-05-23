@@ -18,7 +18,7 @@ get_header();
 
 			<?php if (has_post_thumbnail()) : ?>
 				<figure class="b2v-content__featured">
-					<?php the_post_thumbnail('large'); ?>
+					<?php the_post_thumbnail('large', ['loading' => 'lazy', 'decoding' => 'async']); ?>
 				</figure>
 			<?php endif; ?>
 
