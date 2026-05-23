@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.1.0');
+define('B2VIBE_VERSION', '1.2.0');
 
 function b2vibe_setup(): void
 {
