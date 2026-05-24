@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.4.0');
+define('B2VIBE_VERSION', '1.5.0');
 
 function b2vibe_setup(): void
 {
@@ -556,3 +556,69 @@ function b2vibe_favicon(): void
 	echo '<meta name="theme-color" content="#0a1628">' . "\n";
 }
 add_action('wp_head', 'b2vibe_favicon', 2);
+
+/**
+ * IndexNow: instant search-engine indexing on publish/update.
+ *
+ * – Generates a random API key on first run and stores it in the DB.
+ * – Serves the key-verification file at /{key}.txt automatically.
+ * – Pings IndexNow (Bing/Yandex/Naver/Seznam) whenever a post or page
+ *   transitions to "publish" or is updated while published.
+ */
+function b2vibe_indexnow_key(): string
+{
+    $key = get_option('b2vibe_indexnow_key');
+    if (! $key) {
+        $key = wp_generate_uuid4();
+        $key = str_replace('-', '', $key);          // 32-char hex
+        update_option('b2vibe_indexnow_key', $key, true);
+    }
+    return $key;
+}
+
+/* Serve the verification file: /[key].txt → the key itself. */
+function b2vibe_indexnow_verification(): void
+{
+    $uri = trim($_SERVER['REQUEST_URI'] ?? '', '/');
+    $key = b2vibe_indexnow_key();
+    if ($uri === $key . '.txt') {
+        header('Content-Type: text/plain; charset=utf-8');
+        echo $key;
+        exit;
+    }
+}
+add_action('template_redirect', 'b2vibe_indexnow_verification', 0);
+
+/* Ping IndexNow on publish/update. */
+function b2vibe_indexnow_ping(string $new_status, string $old_status, \WP_Post $post): void
+{
+    if ($new_status !== 'publish') {
+        return;
+    }
+    if (! in_array($post->post_type, ['post', 'page'], true)) {
+        return;
+    }
+
+    $key = b2vibe_indexnow_key();
+    $url = get_permalink($post);
+    if (! $url) {
+        return;
+    }
+
+    $endpoint = 'https://api.indexnow.org/indexnow';
+    $body     = wp_json_encode([
+        'host'    => wp_parse_url(home_url(), PHP_URL_HOST),
+        'key'     => $key,
+        'keyLocation' => home_url('/' . $key . '.txt'),
+        'urlList' => [$url],
+    ]);
+
+    wp_remote_post($endpoint, [
+        'body'      => $body,
+        'headers'   => ['Content-Type' => 'application/json; charset=utf-8'],
+        'timeout'   => 5,
+        'blocking'  => false,   // fire-and-forget
+        'sslverify' => true,
+    ]);
+}
+add_action('transition_post_status', 'b2vibe_indexnow_ping', 10, 3);
