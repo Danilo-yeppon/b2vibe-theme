@@ -1,0 +1,28 @@
+# B2Vibe
+
+> E-commerce Full Outsourcing & Merchant of Record per brand che vogliono vendere sui marketplace europei senza gestire la complessità operativa.
+
+B2Vibe è una società italiana (B2VIBE S.r.l.) nata dall'esperienza di Yeppon, uno dei principali e-commerce italiani con oltre 15 anni di attività e più di 1 milione di ordini spediti in Europa. Offriamo servizi di outsourcing completo per e-commerce: gestiamo vendite, logistica, fiscalità internazionale e customer care per conto dei brand.
+
+## Servizi
+
+- [Ecommerce Management](https://b2vibe.com/ecommerce-management/): Gestione completa dei canali di vendita su marketplace (listing, pricing, promozioni, performance).
+- [Merchant of Record](https://b2vibe.com/merchant-of-record/): Vendiamo per conto del brand come entità fiscale, gestendo IVA, fatturazione e compliance in ogni paese europeo.
+- [Logistica e Magazzino](https://b2vibe.com/logistica-e-magazzino/): Magazzino certificato Amazon Prime a Paderno Dugnano (MI). Picking, packing, spedizioni e gestione resi.
+- [Customer Care](https://b2vibe.com/customer-care/): Assistenza pre e post vendita in 5 lingue con SLA stringenti.
+
+## Marketplace Gestiti
+
+Amazon, eBay, FNAC, Kaufland, ManoMano, Leroy Merlin, Stockly, Digitec, MediaMarkt, BricoBravo.
+
+## Contatti
+
+- Sito: https://b2vibe.com
+- Email: info@b2vibe.com
+- Sede operativa: Via Santi 11/13, 20037 Paderno Dugnano (MI), Italia
+- Prenota una call: https://b2vibe.com/prenota-una-call/
+
+## Optional
+
+- [Blog](https://b2vibe.com/blog/): Articoli e approfondimenti su e-commerce, marketplace e logistica.
+- [llms-full.txt](https://b2vibe.com/llms-full.txt): Versione estesa con dettagli completi su ogni servizio.

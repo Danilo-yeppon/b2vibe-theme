@@ -24,8 +24,8 @@
 					<li><a href="<?php echo esc_url(home_url('/#chi-siamo')); ?>"><?php esc_html_e('Chi siamo', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/prenota-una-call/')); ?>"><?php esc_html_e('Contatti', 'b2vibe'); ?></a></li>
-					<li><a href="#"><?php esc_html_e('Privacy Policy', 'b2vibe'); ?></a></li>
-					<li><a href="#"><?php esc_html_e('Cookie Policy', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><?php esc_html_e('Privacy Policy', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(home_url('/cookie-policy/')); ?>"><?php esc_html_e('Cookie Policy', 'b2vibe'); ?></a></li>
 				</ul>
 			</div>
 

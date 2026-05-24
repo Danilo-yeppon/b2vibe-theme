@@ -1,0 +1,136 @@
+# B2Vibe — Documentazione Completa
+
+> E-commerce Full Outsourcing & Merchant of Record per brand che vogliono vendere sui marketplace europei senza gestire la complessità operativa.
+
+## Chi Siamo
+
+B2Vibe è una società italiana (B2VIBE S.r.l., P.IVA 14234560960) nata dall'esperienza di Yeppon, uno dei principali e-commerce italiani. In oltre 15 anni di attività abbiamo spedito più di 1 milione di ordini in tutta Europa, affrontando ogni sfida operativa: logistica, fiscalità internazionale, compliance e customer care multilingua.
+
+Oggi mettiamo tutta questa esperienza al servizio di brand, produttori e retailer che vogliono vendere online sui principali marketplace europei senza moltiplicare team e costi interni.
+
+### Numeri Chiave
+
+- 15+ anni di esperienza nel settore e-commerce
+- 1.000.000+ ordini spediti in Europa
+- 10+ marketplace gestiti contemporaneamente
+- 5 lingue di assistenza clienti
+- Capitale sociale: 1.000.000 EUR
+
+### Sedi
+
+- Sede legale: Via Paradiso 5, 20831 Seregno (MB), Italia
+- Sede operativa e magazzino: Via Santi 11/13, 20037 Paderno Dugnano (MI), Italia
+
+## A Chi Ci Rivolgiamo
+
+### Brand D2C
+Marchi con un proprio e-commerce che vogliono espandersi sui marketplace senza gestire la complessità operativa. B2Vibe diventa il loro braccio operativo per la vendita multicanale.
+
+### Produttori e PMI
+Aziende manifatturiere che vogliono vendere direttamente al consumatore finale sui principali canali europei, bypassando la distribuzione tradizionale.
+
+### Retailer e Distributori
+Aziende con cataloghi ampi che necessitano di un partner per la gestione multicanale scalabile e conforme alle normative di ogni paese.
+
+---
+
+## Servizi nel Dettaglio
+
+### 1. Ecommerce Management
+
+URL: https://b2vibe.com/ecommerce-management/
+
+Gestione completa dei canali di vendita online del brand:
+
+- **Listing e catalogo**: Creazione e ottimizzazione delle schede prodotto su ogni marketplace, con contenuti localizzati per ogni mercato.
+- **Pricing dinamico**: Strategie di prezzo competitive basate su analisi di mercato, marginalità e posizionamento del brand.
+- **Promozioni e advertising**: Gestione delle campagne promozionali e pubblicitarie su ogni piattaforma (Amazon Ads, eBay Promoted Listings, ecc.).
+- **Performance monitoring**: Dashboard e reportistica sulle vendite, conversioni e KPI per ogni canale.
+- **Ottimizzazione continua**: A/B testing, SEO marketplace, gestione recensioni e reputazione del seller.
+
+### 2. Merchant of Record
+
+URL: https://b2vibe.com/merchant-of-record/
+
+B2Vibe agisce come entità fiscale che vende per conto del brand:
+
+- **Vendita in nome proprio**: B2Vibe acquista e rivende i prodotti del brand, assumendosi la responsabilità fiscale e legale della transazione.
+- **Gestione IVA europea**: Registrazione e gestione delle posizioni IVA in tutti i paesi UE necessari (OSS/IOSS inclusi).
+- **Fatturazione e compliance**: Emissione fatture conformi alle normative locali di ogni paese, gestione dei requisiti WEEE, EPR e packaging.
+- **Zero rischio per il brand**: Il brand non deve aprire posizioni fiscali all'estero né preoccuparsi di adempimenti burocratici.
+- **Reportistica trasparente**: Il brand riceve report dettagliati su vendite, margini e performance per ogni mercato.
+
+### 3. Logistica e Magazzino
+
+URL: https://b2vibe.com/logistica-e-magazzino/
+
+Infrastruttura logistica completa con magazzino certificato:
+
+- **Magazzino certificato Amazon Prime**: Struttura a Paderno Dugnano (MI) abilitata per spedizioni Prime, garantendo i massimi standard di velocità.
+- **Picking e packing**: Processi ottimizzati per la preparazione degli ordini con controllo qualità integrato.
+- **Spedizioni multicanale**: Integrazione con i principali corrieri europei (DHL, GLS, BRT, UPS, ecc.) per spedizioni veloci in tutta Europa.
+- **Gestione resi**: Processo completo di gestione dei resi: ricezione, verifica, ricondizionamento e reinserimento a magazzino.
+- **Inventory management**: Gestione delle scorte in tempo reale con sincronizzazione automatica su tutti i canali di vendita.
+
+### 4. Customer Care
+
+URL: https://b2vibe.com/customer-care/
+
+Assistenza clienti professionale multilingua:
+
+- **5 lingue**: Italiano, inglese, francese, tedesco, spagnolo. Copertura dei principali mercati europei.
+- **Pre e post vendita**: Gestione di tutte le interazioni con il cliente, dalle domande pre-acquisto alla risoluzione di problemi post-vendita.
+- **SLA stringenti**: Tempi di risposta garantiti in linea con i requisiti dei marketplace (es. Amazon: risposta entro 24h).
+- **Protezione brand reputation**: Ogni interazione è gestita per mantenere alti rating del seller e proteggere la reputazione del brand.
+- **Canali integrati**: Email, messaggistica marketplace, telefono. Tutti i canali gestiti da un unico team dedicato.
+
+---
+
+## Vantaggi rispetto alla Gestione In-house
+
+| Aspetto | Gestione In-house | Gestione B2Vibe |
+|---|---|---|
+| Apertura e gestione IVA estere | A carico dell'azienda | Incluso |
+| Gestione burocrazia e compliance | A carico dell'azienda | Incluso |
+| Personale amministrativo / logistica | Da assumere | Incluso |
+| IT e tech stack multicanale | Da sviluppare | Incluso |
+| Spedizioni Amazon Prime | Da ottenere certificazione | Incluso |
+| Rischio blocco account / compliance | Alto | Gestito da B2Vibe |
+
+Riduzione fino all'80% del carico operativo interno.
+
+---
+
+## Marketplace Gestiti
+
+B2Vibe gestisce la vendita sui seguenti marketplace europei:
+
+1. **Amazon** (Prime) — Tutti i marketplace europei (IT, DE, FR, ES, NL, PL, SE, BE)
+2. **eBay** — Mercati europei principali
+3. **FNAC** — Francia
+4. **Kaufland** — Germania
+5. **ManoMano** — Francia, Italia, Spagna, Germania, UK
+6. **Leroy Merlin** — Italia, Francia
+7. **Stockly** — Francia
+8. **Digitec** — Svizzera
+9. **MediaMarkt** — Germania, Austria
+10. **BricoBravo** — Italia
+
+---
+
+## Contatti
+
+- **Sito web**: https://b2vibe.com
+- **Email**: info@b2vibe.com
+- **Sede operativa**: Via Santi 11/13, 20037 Paderno Dugnano (MI), Italia
+- **Sede legale**: Via Paradiso 5, 20831 Seregno (MB), Italia
+- **Prenota una call gratuita**: https://b2vibe.com/prenota-una-call/
+- **Blog**: https://b2vibe.com/blog/
+
+## Informazioni Legali
+
+- Ragione sociale: B2VIBE S.r.l.
+- P.IVA: 14234560960
+- REA: MB - 2767890
+- Codice Univoco: SUBM70N
+- Capitale sociale: 1.000.000 EUR

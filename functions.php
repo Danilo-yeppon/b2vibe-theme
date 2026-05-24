@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.2.1');
+define('B2VIBE_VERSION', '1.4.0');
 
 function b2vibe_setup(): void
 {
@@ -46,9 +46,9 @@ function b2vibe_enqueue_assets(): void
 
 	wp_enqueue_style(
 		'b2vibe-fonts',
-		'https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap',
+		get_template_directory_uri() . '/assets/fonts/raleway.css',
 		[],
-		null
+		B2VIBE_VERSION
 	);
 
 	wp_enqueue_style(
@@ -132,14 +132,13 @@ remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
 remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
 
 /**
- * Performance: Add preconnect for Google Fonts & swap dns-prefetch.
+ * Performance: Preload self-hosted Raleway latin font (critical for FCP).
  */
-function b2vibe_resource_hints(): void
+function b2vibe_preload_fonts(): void
 {
-	echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>' . "\n";
-	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+	echo '<link rel="preload" href="' . esc_url(get_template_directory_uri() . '/assets/fonts/raleway-latin.woff2') . '" as="font" type="font/woff2" crossorigin>' . "\n";
 }
-add_action('wp_head', 'b2vibe_resource_hints', 1);
+add_action('wp_head', 'b2vibe_preload_fonts', 1);
 
 /**
  * Performance: Remove WP version meta, shortlink, REST link, oEmbed, RSD, wlwmanifest.
@@ -269,3 +268,291 @@ function b2vibe_upgrader_source(string $source, string $remote_source, $upgrader
 	return $corrected;
 }
 add_filter('upgrader_source_selection', 'b2vibe_upgrader_source', 10, 3);
+
+/**
+ * JSON-LD Structured Data — outputs schema.org markup in <head>.
+ */
+function b2vibe_jsonld(): void
+{
+	$schema = [];
+
+	// WebSite schema (all pages)
+	$schema[] = [
+		'@type'           => 'WebSite',
+		'@id'             => home_url('/#website'),
+		'url'             => home_url('/'),
+		'name'            => 'B2Vibe',
+		'description'     => 'E-commerce Full Outsourcing & Merchant of Record',
+		'inLanguage'      => 'it-IT',
+		'publisher'       => ['@id' => home_url('/#organization')],
+	];
+
+	// Organization (all pages)
+	$schema[] = [
+		'@type'       => 'Organization',
+		'@id'         => home_url('/#organization'),
+		'name'        => 'B2VIBE S.r.l.',
+		'url'         => home_url('/'),
+		'logo'        => [
+			'@type'  => 'ImageObject',
+			'url'    => get_template_directory_uri() . '/assets/img/logo-b2vibe.png',
+			'width'  => 160,
+			'height' => 24,
+		],
+		'description' => 'E-commerce Full Outsourcing & Merchant of Record. Gestiamo la complessità per far crescere il tuo brand sui marketplace europei.',
+		'email'       => 'info@b2vibe.com',
+		'address'     => [
+			'@type'           => 'PostalAddress',
+			'streetAddress'   => 'Via Santi 11/13',
+			'addressLocality' => 'Paderno Dugnano',
+			'addressRegion'   => 'MI',
+			'postalCode'      => '20037',
+			'addressCountry'  => 'IT',
+		],
+		'legalName'       => 'B2VIBE S.r.l.',
+		'vatID'           => 'IT14234560960',
+		'foundingDate'    => '2022',
+		'numberOfEmployees' => [
+			'@type' => 'QuantitativeValue',
+			'minValue' => 10,
+			'maxValue' => 50,
+		],
+		'sameAs' => [
+				'https://www.linkedin.com/company/b2vibe',
+				'https://www.instagram.com/b2.vibe/',
+			],
+		'knowsAbout' => [
+			'E-commerce outsourcing',
+			'Merchant of Record',
+			'Marketplace management',
+			'Amazon seller management',
+			'Cross-border e-commerce',
+			'Logistica e-commerce',
+			'Customer care multilingua',
+		],
+	];
+
+	// Front page: LocalBusiness + Service offerings
+	if (is_front_page()) {
+		$schema[] = [
+			'@type'          => 'LocalBusiness',
+			'@id'            => home_url('/#localbusiness'),
+			'name'           => 'B2VIBE S.r.l.',
+			'image'          => get_template_directory_uri() . '/assets/img/logo-b2vibe.png',
+			'url'            => home_url('/'),
+			'telephone'      => '',
+			'email'          => 'info@b2vibe.com',
+			'address'        => [
+				'@type'           => 'PostalAddress',
+				'streetAddress'   => 'Via Santi 11/13',
+				'addressLocality' => 'Paderno Dugnano',
+				'addressRegion'   => 'MI',
+				'postalCode'      => '20037',
+				'addressCountry'  => 'IT',
+			],
+			'priceRange'     => '€€€',
+			'areaServed'     => [
+				'@type' => 'GeoCircle',
+				'geoMidpoint' => [
+					'@type'     => 'GeoCoordinates',
+					'latitude'  => 45.52,
+					'longitude' => 9.17,
+				],
+				'geoRadius' => '2000000',
+			],
+			'hasOfferCatalog' => [
+				'@type'           => 'OfferCatalog',
+				'name'            => 'Servizi B2Vibe',
+				'itemListElement' => [
+					[
+						'@type' => 'OfferCatalog',
+						'name'  => 'Ecommerce Management',
+						'url'   => home_url('/ecommerce-management/'),
+					],
+					[
+						'@type' => 'OfferCatalog',
+						'name'  => 'Merchant of Record',
+						'url'   => home_url('/merchant-of-record/'),
+					],
+					[
+						'@type' => 'OfferCatalog',
+						'name'  => 'Logistica e Magazzino',
+						'url'   => home_url('/logistica-e-magazzino/'),
+					],
+					[
+						'@type' => 'OfferCatalog',
+						'name'  => 'Customer Care',
+						'url'   => home_url('/customer-care/'),
+					],
+				],
+			],
+		];
+	}
+
+	// Service pages (template: page-servizio.php)
+	if (is_page() && get_page_template_slug() === 'page-servizio.php') {
+		$schema[] = [
+			'@type'       => 'Service',
+			'@id'         => get_permalink() . '#service',
+			'name'        => get_the_title(),
+			'description' => get_post_meta(get_the_ID(), 'b2v_service_intro', true) ?: wp_strip_all_tags(get_the_excerpt()),
+			'url'         => get_permalink(),
+			'provider'    => ['@id' => home_url('/#organization')],
+			'areaServed'  => [
+				'@type' => 'Place',
+				'name'  => 'Europa',
+			],
+			'serviceType' => get_the_title(),
+		];
+	}
+
+	// Single blog posts: Article
+	if (is_singular('post')) {
+		$thumb = get_the_post_thumbnail_url(get_the_ID(), 'large');
+		$schema[] = [
+			'@type'            => 'Article',
+			'@id'              => get_permalink() . '#article',
+			'headline'         => get_the_title(),
+			'description'      => wp_strip_all_tags(get_the_excerpt()),
+			'url'              => get_permalink(),
+			'datePublished'    => get_the_date('c'),
+			'dateModified'     => get_the_modified_date('c'),
+			'mainEntityOfPage' => get_permalink(),
+			'image'            => $thumb ?: '',
+			'author'           => [
+				'@type' => 'Organization',
+				'name'  => 'B2Vibe',
+				'url'   => home_url('/'),
+			],
+			'publisher'        => ['@id' => home_url('/#organization')],
+			'inLanguage'       => 'it-IT',
+		];
+	}
+
+	// Blog archive: CollectionPage
+	if (is_home() || is_archive()) {
+		$schema[] = [
+			'@type'       => 'CollectionPage',
+			'@id'         => get_pagenum_link(1) . '#collection',
+			'name'        => is_category() ? single_cat_title('', false) : 'Blog B2Vibe',
+			'description' => 'Articoli e approfondimenti su e-commerce, marketplace e logistica.',
+			'url'         => get_pagenum_link(1),
+			'isPartOf'    => ['@id' => home_url('/#website')],
+		];
+	}
+
+	// BreadcrumbList (all pages except front page)
+	if (! is_front_page()) {
+		$crumbs = [
+			['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url('/')],
+		];
+		$pos = 2;
+
+		if (is_singular('post')) {
+			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos++, 'name' => 'Blog', 'item' => get_permalink(get_option('page_for_posts'))];
+			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos, 'name' => get_the_title()];
+		} elseif (is_home()) {
+			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos, 'name' => 'Blog'];
+		} elseif (is_page()) {
+			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos, 'name' => get_the_title()];
+		}
+
+		$schema[] = [
+			'@type'           => 'BreadcrumbList',
+			'@id'             => get_permalink() . '#breadcrumb',
+			'itemListElement' => $crumbs,
+		];
+	}
+
+	// Output
+	$output = [
+		'@context' => 'https://schema.org',
+		'@graph'   => $schema,
+	];
+
+	echo '<script type="application/ld+json">' . wp_json_encode($output, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . '</script>' . "\n";
+}
+add_action('wp_head', 'b2vibe_jsonld', 5);
+
+/**
+ * Serve llms.txt and llms-full.txt from theme directory.
+ */
+function b2vibe_llms_txt(): void
+{
+	$request = $_SERVER['REQUEST_URI'] ?? '';
+
+	if ($request === '/llms.txt' || $request === '/llms-full.txt') {
+		$file = get_template_directory() . '/' . basename($request);
+		if (file_exists($file)) {
+			header('Content-Type: text/plain; charset=utf-8');
+			header('X-Robots-Tag: noindex');
+			readfile($file);
+			exit;
+		}
+	}
+}
+add_action('template_redirect', 'b2vibe_llms_txt', 1);
+
+/**
+ * Serve manifest.json for PWA / Web App.
+ */
+function b2vibe_manifest(): void
+{
+	if (($_SERVER['REQUEST_URI'] ?? '') !== '/manifest.json') {
+		return;
+	}
+
+	$dir = get_template_directory_uri();
+	$img = file_exists(get_template_directory() . '/assets/img/icon-192.png') ? $dir . '/assets/img' : content_url('/uploads/2026/05');
+
+	header('Content-Type: application/manifest+json');
+	echo wp_json_encode([
+		'name'             => 'B2Vibe - E-commerce Outsourcing',
+		'short_name'       => 'B2Vibe',
+		'description'      => 'E-commerce Full Outsourcing & Merchant of Record',
+		'start_url'        => '/',
+		'display'          => 'standalone',
+		'background_color' => '#0a1628',
+		'theme_color'      => '#0a1628',
+		'icons'            => [
+			['src' => $img . '/icon-192.png', 'sizes' => '192x192', 'type' => 'image/png'],
+			['src' => $img . '/icon-512.png', 'sizes' => '512x512', 'type' => 'image/png'],
+		],
+	], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+	exit;
+}
+add_action('template_redirect', 'b2vibe_manifest', 1);
+
+/**
+ * Security: Send hardening HTTP headers on every front-end response.
+ */
+function b2vibe_security_headers(): void
+{
+	if (is_admin()) {
+		return;
+	}
+
+	header('X-Content-Type-Options: nosniff');
+	header('X-Frame-Options: SAMEORIGIN');
+	header('Referrer-Policy: strict-origin-when-cross-origin');
+	header('Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()');
+	if (is_ssl()) {
+		header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+	}
+}
+add_action('send_headers', 'b2vibe_security_headers');
+
+/**
+ * Favicon, Apple Touch Icon & Web App Manifest.
+ */
+function b2vibe_favicon(): void
+{
+	$dir = get_template_directory_uri();
+	// Check theme dir first, fall back to uploads
+	$img = file_exists(get_template_directory() . '/assets/img/favicon-32.png') ? $dir . '/assets/img' : content_url('/uploads/2026/05');
+	echo '<link rel="icon" type="image/png" sizes="32x32" href="' . esc_url($img . '/favicon-32.png') . '">' . "\n";
+	echo '<link rel="apple-touch-icon" sizes="180x180" href="' . esc_url($img . '/apple-touch-icon.png') . '">' . "\n";
+	echo '<link rel="manifest" href="' . esc_url(home_url('/manifest.json')) . '">' . "\n";
+	echo '<meta name="theme-color" content="#0a1628">' . "\n";
+}
+add_action('wp_head', 'b2vibe_favicon', 2);
