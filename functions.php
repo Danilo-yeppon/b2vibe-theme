@@ -622,3 +622,9 @@ function b2vibe_indexnow_ping(string $new_status, string $old_status, \WP_Post $
     ]);
 }
 add_action('transition_post_status', 'b2vibe_indexnow_ping', 10, 3);
+
+/**
+ * Disable Yoast SEO JSON-LD schema output to avoid duplicate structured data.
+ * The theme outputs its own, more detailed schema via b2vibe_jsonld().
+ */
+add_filter('wpseo_json_ld_output', '__return_false');
