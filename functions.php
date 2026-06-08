@@ -75,6 +75,16 @@ function b2vibe_enqueue_assets(): void
 		true
 	);
 
+	if (is_front_page()) {
+		wp_enqueue_script(
+			'b2vibe-scramble',
+			get_template_directory_uri() . '/assets/js/scramble.js',
+			[],
+			B2VIBE_VERSION,
+			true
+		);
+	}
+
 	// Load CF7 assets only on the contact page
 	if (! is_page('prenota-una-call')) {
 		wp_dequeue_style('contact-form-7');

@@ -18,8 +18,8 @@ get_header();
 		</div>
 
 		<h1>
-			<?php esc_html_e('Making sales', 'b2vibe'); ?>
-			<br><span class="b2v-accent"><?php esc_html_e('effectively simple.', 'b2vibe'); ?></span>
+			<span data-scramble="<?php esc_attr_e('Making sales', 'b2vibe'); ?>"><?php esc_html_e('Making sales', 'b2vibe'); ?></span>
+			<br><span class="b2v-accent" data-scramble="<?php esc_attr_e('effectively simple.', 'b2vibe'); ?>"><?php esc_html_e('effectively simple.', 'b2vibe'); ?></span>
 		</h1>
 
 		<p class="b2v-hero__sub">

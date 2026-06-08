@@ -80,6 +80,12 @@
 	color: var(--b2v-accent);
 }
 
+/* Scramble: prevent layout shift while hidden */
+.b2v-hero h1 [data-scramble] {
+	display: inline-block;
+	min-width: 1ch;
+}
+
 /* Subtitle */
 .b2v-hero__sub {
 	font-size: 18px;
