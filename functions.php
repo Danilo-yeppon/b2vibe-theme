@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.5.0');
+define('B2VIBE_VERSION', '1.5.2');
 
 function b2vibe_setup(): void
 {
@@ -84,6 +84,14 @@ function b2vibe_enqueue_assets(): void
 			true
 		);
 	}
+
+	wp_enqueue_script(
+		'warmly',
+		'https://opps-widget.getwarmly.com/warmly.js?clientId=f360013ba4c91a52988319241b9cd5ef',
+		[],
+		null,
+		['strategy' => 'defer', 'in_footer' => false]
+	);
 
 	// Load CF7 assets only on the contact page
 	if (! is_page('prenota-una-call')) {
