@@ -1,11 +1,11 @@
 {
-  "name": "B2Vibe - E-commerce Outsourcing",
+  "name": "B2Vibe — E-commerce Full Outsourcing",
   "short_name": "B2Vibe",
-  "description": "E-commerce Full Outsourcing & Merchant of Record",
+  "description": "E-commerce Service Provider, Full Outsourcing Multicanale & Merchant of Record",
   "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0a1628",
-  "theme_color": "#0a1628",
+  "display": "browser",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "/wp-content/themes/b2vibe/assets/img/icon-192.png",
