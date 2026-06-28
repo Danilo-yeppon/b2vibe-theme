@@ -1,32 +1,29 @@
 (function () {
-	function initNav() {
-		const toggle = document.querySelector('.b2v-nav-toggle');
-		const nav = document.querySelector('.b2v-nav');
-		if (!toggle || !nav) return;
-
-		toggle.addEventListener('click', () => {
+	// Event delegation on the document so the menu works no matter WHEN this
+	// script runs (normal, async, defer, or injected late by a performance/
+	// cache plugin) and even if the header markup is re-rendered after load.
+	// `document` always exists by the time any script executes, so there is no
+	// DOMContentLoaded race and no dependency on the elements existing yet.
+	document.addEventListener('click', function (e) {
+		// Toggle the menu when the hamburger button (or one of its <span>s) is tapped.
+		const toggle = e.target.closest('.b2v-nav-toggle');
+		if (toggle) {
+			const nav = document.querySelector('.b2v-nav');
+			if (!nav) return;
 			const open = nav.classList.toggle('is-open');
 			toggle.setAttribute('aria-expanded', String(open));
-		});
+			return;
+		}
 
-		// Close the menu after tapping any navigation link. Menu items can be
+		// Close the menu after tapping any link inside it. Menu items can be
 		// stored as absolute URLs (e.g. https://b2vibe.com/#chi-siamo), so we
 		// can't rely on an href^="#" selector here.
-		nav.querySelectorAll('a').forEach(link => {
-			link.addEventListener('click', () => {
-				nav.classList.remove('is-open');
-				toggle.setAttribute('aria-expanded', 'false');
-			});
-		});
-	}
-
-	// Run immediately when the DOM is already parsed. This keeps the menu
-	// working even if the script is loaded async/deferred or injected late by
-	// a performance/cache plugin, in which case DOMContentLoaded has already
-	// fired and a DOMContentLoaded listener would never run.
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initNav);
-	} else {
-		initNav();
-	}
+		const link = e.target.closest('.b2v-nav a');
+		if (link) {
+			const nav = link.closest('.b2v-nav') || document.querySelector('.b2v-nav');
+			const btn = document.querySelector('.b2v-nav-toggle');
+			if (nav) nav.classList.remove('is-open');
+			if (btn) btn.setAttribute('aria-expanded', 'false');
+		}
+	});
 })();
