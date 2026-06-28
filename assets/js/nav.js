@@ -4,13 +4,15 @@ function b2vNavInit() {
 	if (!toggle || !nav) return;
 
 	toggle.addEventListener('click', () => {
-		const open = nav.classList.toggle('is-open');
-		toggle.setAttribute('aria-expanded', String(open));
+		const isOpen = nav.classList.toggle('is-open');
+		nav.style.display = isOpen ? 'flex' : '';
+		toggle.setAttribute('aria-expanded', String(isOpen));
 	});
 
 	document.addEventListener('click', (e) => {
 		if (nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
 			nav.classList.remove('is-open');
+			nav.style.display = '';
 			toggle.setAttribute('aria-expanded', 'false');
 		}
 	});
@@ -18,6 +20,7 @@ function b2vNavInit() {
 	nav.querySelectorAll('a').forEach(link => {
 		link.addEventListener('click', () => {
 			nav.classList.remove('is-open');
+			nav.style.display = '';
 			toggle.setAttribute('aria-expanded', 'false');
 		});
 	});
