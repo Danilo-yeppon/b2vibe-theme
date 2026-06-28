@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.5.6');
+define('B2VIBE_VERSION', '1.5.7');
 
 function b2vibe_setup(): void
 {
@@ -84,6 +84,13 @@ function b2vibe_enqueue_assets(): void
 			true
 		);
 	}
+
+	add_filter('script_loader_tag', function ($tag, $handle) {
+		if ($handle === 'warmly') {
+			return str_replace(" id='warmly-js'", " id='warmly-script-loader'", $tag);
+		}
+		return $tag;
+	}, 10, 2);
 
 	wp_enqueue_script(
 		'warmly',
