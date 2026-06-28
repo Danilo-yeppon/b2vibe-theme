@@ -4,7 +4,7 @@ Theme URI: https://b2vibe.com
 Author: B2Vibe
 Author URI: https://b2vibe.com
 Description: Dark theme for B2Vibe — E-commerce Full Outsourcing & Merchant of Record. Raleway font, neon green accent, modern card-based layout.
-Version: 1.5.2
+Version: 1.5.3
 Requires at least: 6.4
 Tested up to: 6.9
 Requires PHP: 8.1
@@ -579,8 +579,8 @@ h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 700; }
 
 /* --- Service pages --- */
 .b2v-service__hero {
-	padding-top: 140px;
-	padding-bottom: 80px;
+	padding-top: 100px;
+	padding-bottom: 64px;
 }
 
 .b2v-service__hero h1 {
@@ -671,8 +671,8 @@ h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 700; }
 
 @media (max-width: 768px) {
 	.b2v-service__hero {
-		padding-top: 104px;
-		padding-bottom: 48px;
+		padding-top: 80px;
+		padding-bottom: 40px;
 	}
 
 	.b2v-service__features-grid {
