@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.5.8');
+define('B2VIBE_VERSION', '1.5.9');
 
 function b2vibe_setup(): void
 {
@@ -228,7 +228,7 @@ function b2vibe_github_updater($transient)
 	}
 
 	$repo  = 'Danilo-yeppon/b2vibe-theme';
-	$theme = 'b2vibe';
+	$theme = get_stylesheet();
 
 	$response = wp_remote_get("https://api.github.com/repos/{$repo}/releases/latest", [
 		'headers' => ['Accept' => 'application/vnd.github.v3+json'],
@@ -274,9 +274,11 @@ function b2vibe_upgrader_source(string $source, string $remote_source, $upgrader
 		return $source;
 	}
 
-	$corrected = trailingslashit($remote_source) . 'b2vibe/';
+	$corrected = trailingslashit($remote_source) . get_stylesheet() . '/';
 	if ($source !== $corrected && is_dir($source)) {
-		rename($source, $corrected);
+		if (! rename($source, $corrected)) {
+			return $source;
+		}
 	}
 
 	return $corrected;

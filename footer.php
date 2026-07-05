@@ -19,6 +19,19 @@
 			</div>
 
 			<div class="b2v-footer__col">
+				<h4><?php esc_html_e('Marketplace', 'b2vibe'); ?></h4>
+				<ul>
+					<li><a href="<?php echo esc_url(home_url('/vendere-su-amazon/')); ?>">Amazon</a></li>
+					<li><a href="<?php echo esc_url(home_url('/vendere-su-ebay/')); ?>">eBay</a></li>
+					<li><a href="<?php echo esc_url(home_url('/vendere-su-cdiscount/')); ?>">Cdiscount</a></li>
+					<li><a href="<?php echo esc_url(home_url('/vendere-su-manomano/')); ?>">ManoMano</a></li>
+					<li><a href="<?php echo esc_url(home_url('/vendere-su-fnac-darty/')); ?>">FNAC Darty</a></li>
+					<li><a href="<?php echo esc_url(home_url('/vendere-su-kaufland/')); ?>">Kaufland</a></li>
+					<li><a href="<?php echo esc_url(home_url('/vendere-su-leroy-merlin/')); ?>">Leroy Merlin</a></li>
+				</ul>
+			</div>
+
+			<div class="b2v-footer__col">
 				<h4><?php esc_html_e('Azienda', 'b2vibe'); ?></h4>
 				<ul>
 					<li><a href="<?php echo esc_url(home_url('/#chi-siamo')); ?>"><?php esc_html_e('Chi siamo', 'b2vibe'); ?></a></li>
