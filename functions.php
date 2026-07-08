@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.5.9');
+define('B2VIBE_VERSION', '1.6.0');
 
 function b2vibe_setup(): void
 {
@@ -88,6 +88,11 @@ function b2vibe_enqueue_assets(): void
 	add_action('wp_head', function () {
 		echo '<script id="warmly-script-loader" data-no-optimize="1" data-no-defer="1" src="https://opps-widget.getwarmly.com/warmly.js?clientId=f360013ba4c91a52988319241b9cd5ef" defer></script>' . "\n";
 	}, 99);
+
+	add_action('wp_head', function () {
+		echo '<script async data-no-optimize="1" src="https://www.googletagmanager.com/gtag/js?id=G-V4XBRN2PM5"></script>' . "\n";
+		echo '<script data-no-optimize="1">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-V4XBRN2PM5");</script>' . "\n";
+	}, 1);
 
 	// Load CF7 assets only on the contact page
 	if (! is_page('prenota-una-call')) {
