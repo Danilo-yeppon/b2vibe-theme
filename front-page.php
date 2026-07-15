@@ -120,7 +120,7 @@ get_header();
 			?>
 			<li class="b2v-clienti__item">
 				<img
-					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/clienti/' . $slug . '.png'); ?>"
+					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/clienti/' . $slug . '.png?ver=' . B2VIBE_VERSION); ?>"
 					alt="<?php echo esc_attr($nome); ?>"
 					class="b2v-clienti__logo"
 					loading="lazy"
