@@ -96,6 +96,41 @@ get_header();
 	</div>
 </section>
 
+<!-- 3b. CI HANNO SCELTO -->
+<section class="b2v-section b2v-section--alt b2v-clienti b2v-text-center" id="clienti">
+	<div class="b2v-container">
+		<span class="b2v-label"><?php esc_html_e('Ci hanno scelto', 'b2vibe'); ?></span>
+		<h2><?php esc_html_e('I brand che hanno affidato a noi il loro ecommerce.', 'b2vibe'); ?></h2>
+
+		<ul class="b2v-clienti__grid">
+			<?php
+			$clienti = [
+				'monza'    => 'AC Monza',
+				'sidi'     => 'Sidi Sport',
+				'eleveit'  => 'Eleveit',
+				'taac'     => 'Taac',
+				'intex'    => 'Intex',
+				'keter'    => 'Keter',
+				'einhell'  => 'Einhell',
+				'colombo'  => 'Colombo',
+				'mandelli' => 'Mandelli',
+				'rominas'  => "Romina's",
+			];
+			foreach ($clienti as $slug => $nome) :
+			?>
+			<li class="b2v-clienti__item">
+				<img
+					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/clienti/' . $slug . '.png'); ?>"
+					alt="<?php echo esc_attr($nome); ?>"
+					class="b2v-clienti__logo"
+					loading="lazy"
+					decoding="async">
+			</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+</section>
+
 <!-- 4. A CHI CI RIVOLGIAMO -->
 <section class="b2v-section b2v-target" id="chi-siamo">
 	<div class="b2v-container">

@@ -499,6 +499,41 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 	letter-spacing: 0.02em;
 }
 
+/* --- Ci hanno scelto --- */
+.b2v-clienti__grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 12px;
+	margin-top: 48px;
+	padding: 0;
+	list-style: none;
+}
+
+.b2v-clienti__item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 96px;
+	padding: 16px;
+	background-color: var(--b2v-bg-card);
+	border: 1px solid var(--b2v-border);
+	border-radius: var(--b2v-radius-card);
+}
+
+.b2v-clienti__logo {
+	width: auto;
+	height: auto;
+	max-width: 120px;
+	max-height: 48px;
+	object-fit: contain;
+	opacity: 0.75;
+	transition: opacity 0.2s ease;
+}
+
+.b2v-clienti__item:hover .b2v-clienti__logo {
+	opacity: 1;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
 	.b2v-hero {
@@ -543,5 +578,14 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 
 	.b2v-stats__grid {
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.b2v-clienti__grid {
+		grid-template-columns: repeat(2, 1fr);
+		margin-top: 32px;
+	}
+
+	.b2v-clienti__item {
+		min-height: 80px;
 	}
 }
