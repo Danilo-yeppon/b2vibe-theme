@@ -96,10 +96,10 @@ get_header();
 	</div>
 </section>
 
-<!-- 3b. CI HANNO SCELTO -->
+<!-- 3b. SI SONO AFFIDATI A NOI -->
 <section class="b2v-section b2v-section--alt b2v-clienti b2v-text-center" id="clienti">
 	<div class="b2v-container">
-		<span class="b2v-label"><?php esc_html_e('Ci hanno scelto', 'b2vibe'); ?></span>
+		<span class="b2v-label"><?php esc_html_e('Si sono affidati a noi', 'b2vibe'); ?></span>
 		<h2><?php esc_html_e('I brand che hanno affidato a noi il loro ecommerce.', 'b2vibe'); ?></h2>
 
 		<ul class="b2v-clienti__grid">
@@ -120,7 +120,7 @@ get_header();
 			?>
 			<li class="b2v-clienti__item">
 				<img
-					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/clienti/' . $slug . '.png?ver=' . B2VIBE_VERSION); ?>"
+					src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/clienti/' . $slug . '.png?ver=' . b2vibe_asset_ver('assets/img/clienti/' . $slug . '.png')); ?>"
 					alt="<?php echo esc_attr($nome); ?>"
 					class="b2v-clienti__logo"
 					loading="lazy"

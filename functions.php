@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.7.3');
+define('B2VIBE_VERSION', '1.7.4');
 
 function b2vibe_setup(): void
 {
@@ -40,6 +40,12 @@ function b2vibe_setup(): void
 }
 add_action('after_setup_theme', 'b2vibe_setup');
 
+function b2vibe_asset_ver(string $relative): string
+{
+	$path = get_template_directory() . '/' . ltrim($relative, '/');
+	return file_exists($path) ? (string) filemtime($path) : B2VIBE_VERSION;
+}
+
 function b2vibe_enqueue_assets(): void
 {
 	wp_deregister_script('jquery');
@@ -55,7 +61,7 @@ function b2vibe_enqueue_assets(): void
 		'b2vibe-style',
 		get_stylesheet_uri(),
 		['b2vibe-fonts'],
-		B2VIBE_VERSION
+		b2vibe_asset_ver('style.css')
 	);
 
 	if (is_front_page()) {
@@ -63,7 +69,7 @@ function b2vibe_enqueue_assets(): void
 			'b2vibe-front',
 			get_template_directory_uri() . '/front-page.css',
 			['b2vibe-style'],
-			B2VIBE_VERSION
+			b2vibe_asset_ver('front-page.css')
 		);
 	}
 
