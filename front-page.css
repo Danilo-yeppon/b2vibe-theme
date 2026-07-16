@@ -513,7 +513,7 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 112px;
+	min-height: 104px;
 	padding: 16px;
 	background-color: var(--b2v-bg-card);
 	border: 1px solid var(--b2v-border);
@@ -523,8 +523,8 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 .b2v-clienti__logo {
 	width: auto;
 	height: auto;
-	max-width: min(150px, 100%);
-	max-height: 60px;
+	max-width: min(135px, 100%);
+	max-height: 54px;
 	object-fit: contain;
 	opacity: 0.75;
 	transition: opacity 0.2s ease;
@@ -586,6 +586,6 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 	}
 
 	.b2v-clienti__item {
-		min-height: 92px;
+		min-height: 86px;
 	}
 }
