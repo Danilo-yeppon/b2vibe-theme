@@ -203,6 +203,13 @@ get_header();
 				<p><?php esc_html_e('Assistenza pre e post vendita in 5 lingue con SLA stringenti. Gestiamo ogni interazione per proteggere la reputazione del brand.', 'b2vibe'); ?></p>
 				<span class="b2v-servizi__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
 			</a>
+
+			<a href="<?php echo esc_url(home_url('/cataloghi-premi-aziendali/')); ?>" class="b2v-card b2v-servizi__card">
+				<span class="b2v-servizi__num">05</span>
+				<h3><?php esc_html_e('Cataloghi Premi e Incentive', 'b2vibe'); ?></h3>
+				<p><?php esc_html_e('Premi per campagne di incentivazione: catalogo su misura, raccolta ordini e spedizione diretta a ogni destinatario.', 'b2vibe'); ?></p>
+				<span class="b2v-servizi__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
+			</a>
 		</div>
 	</div>
 </section>

@@ -253,6 +253,10 @@
 	gap: var(--b2v-gap);
 }
 
+.b2v-servizi__card:nth-child(odd):last-child {
+	grid-column: 1 / -1;
+}
+
 .b2v-servizi__card {
 	padding: 36px;
 	transition: border-color 0.2s ease;

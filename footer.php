@@ -15,6 +15,7 @@
 					<li><a href="<?php echo esc_url(home_url('/merchant-of-record/')); ?>"><?php esc_html_e('Merchant of Record', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/logistica-e-magazzino/')); ?>"><?php esc_html_e('Logistica e Magazzino', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/customer-care/')); ?>"><?php esc_html_e('Customer Care', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(home_url('/cataloghi-premi-aziendali/')); ?>"><?php esc_html_e('Cataloghi Premi', 'b2vibe'); ?></a></li>
 				</ul>
 			</div>
 
