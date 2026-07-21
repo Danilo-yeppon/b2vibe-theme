@@ -4,7 +4,7 @@ Theme URI: https://b2vibe.com
 Author: B2Vibe
 Author URI: https://b2vibe.com
 Description: Dark theme for B2Vibe — E-commerce Full Outsourcing & Merchant of Record. Raleway font, neon green accent, modern card-based layout.
-Version: 1.7.7
+Version: 1.8.0
 Requires at least: 6.4
 Tested up to: 6.9
 Requires PHP: 8.1
@@ -899,5 +899,93 @@ h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 700; }
 
 	.b2v-archive-grid {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* --- Service page: approfondimento --- */
+.b2v-service__content {
+	padding-top: 0;
+}
+
+.b2v-service__content h2 {
+	margin-top: 48px;
+	margin-bottom: 16px;
+}
+
+.b2v-service__content h3 {
+	margin-top: 28px;
+	margin-bottom: 10px;
+}
+
+.b2v-service__content p,
+.b2v-service__content li {
+	color: var(--b2v-text-muted);
+	line-height: 1.75;
+}
+
+.b2v-service__content p {
+	margin-bottom: 16px;
+}
+
+.b2v-service__content ul,
+.b2v-service__content ol {
+	margin-bottom: 16px;
+	padding-left: 24px;
+}
+
+.b2v-service__content table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-block: 24px;
+	font-size: 0.9375rem;
+}
+
+.b2v-service__content th,
+.b2v-service__content td {
+	border: 1px solid var(--b2v-border);
+	padding: 10px 14px;
+	text-align: left;
+	color: var(--b2v-text-muted);
+}
+
+.b2v-service__content th {
+	color: var(--b2v-text);
+	background: var(--b2v-bg-card);
+}
+
+/* --- Cookie banner (Complianz): compatto su mobile --- */
+@media (max-width: 768px) {
+	.cmplz-cookiebanner {
+		padding: 12px 14px !important;
+		gap: 6px !important;
+		max-height: 42vh;
+		overflow-y: auto;
+	}
+
+	.cmplz-cookiebanner .cmplz-header {
+		display: none !important;
+	}
+
+	.cmplz-cookiebanner .cmplz-message {
+		font-size: 0.75rem !important;
+		line-height: 1.45 !important;
+		margin-bottom: 4px !important;
+	}
+
+	.cmplz-cookiebanner .cmplz-buttons {
+		flex-direction: row !important;
+		flex-wrap: wrap !important;
+		gap: 8px !important;
+	}
+
+	.cmplz-cookiebanner .cmplz-btn {
+		padding: 9px 12px !important;
+		font-size: 0.8125rem !important;
+		flex: 1 1 auto !important;
+		margin: 0 !important;
+	}
+
+	.cmplz-cookiebanner .cmplz-categories {
+		display: none;
 	}
 }

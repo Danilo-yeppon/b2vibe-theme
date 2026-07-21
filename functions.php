@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.7.7');
+define('B2VIBE_VERSION', '1.8.0');
 
 function b2vibe_setup(): void
 {
@@ -91,13 +91,19 @@ function b2vibe_enqueue_assets(): void
 		);
 	}
 
+	// Third-party scripts (GA4 + Warmly) deferred off the critical path:
+	// injected on first user interaction, or after a timeout fallback.
+	// The gtag() stub queues events immediately, so nothing is lost.
 	add_action('wp_head', function () {
-		echo '<script id="warmly-script-loader" data-no-optimize="1" data-no-defer="1" src="https://opps-widget.getwarmly.com/warmly.js?clientId=f360013ba4c91a52988319241b9cd5ef" defer></script>' . "\n";
-	}, 99);
-
-	add_action('wp_head', function () {
-		echo '<script async data-no-optimize="1" src="https://www.googletagmanager.com/gtag/js?id=G-V4XBRN2PM5"></script>' . "\n";
-		echo '<script data-no-optimize="1">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-V4XBRN2PM5");</script>' . "\n";
+		echo '<script data-no-optimize="1" data-no-defer="1">'
+			. 'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-V4XBRN2PM5");'
+			. '(function(){var d=false;function inject(src,id){var s=document.createElement("script");s.src=src;s.async=true;if(id)s.id=id;document.head.appendChild(s);}'
+			. 'function load(){if(d)return;d=true;'
+			. 'inject("https://www.googletagmanager.com/gtag/js?id=G-V4XBRN2PM5");'
+			. 'setTimeout(function(){inject("https://opps-widget.getwarmly.com/warmly.js?clientId=f360013ba4c91a52988319241b9cd5ef","warmly-script-loader");},1500);}'
+			. '["scroll","click","keydown","touchstart","mousemove"].forEach(function(e){addEventListener(e,load,{once:true,passive:true});});'
+			. 'setTimeout(load,4000);})();'
+			. '</script>' . "\n";
 	}, 2);
 
 	// Load CF7 assets only on the contact page
@@ -344,6 +350,16 @@ function b2vibe_jsonld(): void
 			'minValue' => 10,
 			'maxValue' => 50,
 		],
+		'contactPoint' => [
+			[
+				'@type'             => 'ContactPoint',
+				'contactType'       => 'sales',
+				'email'             => 'info@b2vibe.com',
+				'url'               => home_url('/prenota-una-call/'),
+				'areaServed'        => 'EU',
+				'availableLanguage' => ['Italian', 'English'],
+			],
+		],
 		'sameAs' => [
 				'https://www.linkedin.com/company/b2vibe',
 				'https://www.instagram.com/b2.vibe/',
@@ -359,60 +375,16 @@ function b2vibe_jsonld(): void
 		],
 	];
 
-	// Front page: LocalBusiness + Service offerings
-	if (is_front_page()) {
+	// Contact page
+	if (is_page('prenota-una-call')) {
 		$schema[] = [
-			'@type'          => 'LocalBusiness',
-			'@id'            => home_url('/#localbusiness'),
-			'name'           => 'B2VIBE S.r.l.',
-			'image'          => get_template_directory_uri() . '/assets/img/logo-b2vibe.png',
-			'url'            => home_url('/'),
-			'telephone'      => '',
-			'email'          => 'info@b2vibe.com',
-			'address'        => [
-				'@type'           => 'PostalAddress',
-				'streetAddress'   => 'Via Santi 11/13',
-				'addressLocality' => 'Paderno Dugnano',
-				'addressRegion'   => 'MI',
-				'postalCode'      => '20037',
-				'addressCountry'  => 'IT',
-			],
-			'priceRange'     => '€€€',
-			'areaServed'     => [
-				'@type' => 'GeoCircle',
-				'geoMidpoint' => [
-					'@type'     => 'GeoCoordinates',
-					'latitude'  => 45.52,
-					'longitude' => 9.17,
-				],
-				'geoRadius' => '2000000',
-			],
-			'hasOfferCatalog' => [
-				'@type'           => 'OfferCatalog',
-				'name'            => 'Servizi B2Vibe',
-				'itemListElement' => [
-					[
-						'@type' => 'OfferCatalog',
-						'name'  => 'Ecommerce Management',
-						'url'   => home_url('/ecommerce-management/'),
-					],
-					[
-						'@type' => 'OfferCatalog',
-						'name'  => 'Merchant of Record',
-						'url'   => home_url('/merchant-of-record/'),
-					],
-					[
-						'@type' => 'OfferCatalog',
-						'name'  => 'Logistica e Magazzino',
-						'url'   => home_url('/logistica-e-magazzino/'),
-					],
-					[
-						'@type' => 'OfferCatalog',
-						'name'  => 'Customer Care',
-						'url'   => home_url('/customer-care/'),
-					],
-				],
-			],
+			'@type'      => 'ContactPage',
+			'@id'        => get_permalink() . '#webpage',
+			'url'        => get_permalink(),
+			'name'       => get_the_title(),
+			'isPartOf'   => ['@id' => home_url('/#website')],
+			'about'      => ['@id' => home_url('/#organization')],
+			'inLanguage' => 'it-IT',
 		];
 	}
 
@@ -511,8 +483,8 @@ function b2vibe_llms_txt(): void
 	if ($request === '/llms.txt' || $request === '/llms-full.txt') {
 		$file = get_template_directory() . '/' . basename($request);
 		if (file_exists($file)) {
+			status_header(200);
 			header('Content-Type: text/plain; charset=utf-8');
-			header('X-Robots-Tag: noindex');
 			readfile($file);
 			exit;
 		}

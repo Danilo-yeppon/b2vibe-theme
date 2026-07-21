@@ -96,6 +96,15 @@ $benefits = $benefits ? json_decode($benefits, true) : [];
 	</section>
 	<?php endif; ?>
 
+	<!-- Approfondimento (contenuto libero della pagina) -->
+	<?php if (trim(get_the_content()) !== '') : ?>
+	<section class="b2v-section b2v-service__content">
+		<div class="b2v-container b2v-content--narrow b2v-content__body">
+			<?php the_content(); ?>
+		</div>
+	</section>
+	<?php endif; ?>
+
 	<!-- CTA -->
 	<section class="b2v-cta-final">
 		<div class="b2v-container">
