@@ -228,6 +228,18 @@ function b2vibe_register_meta(): void
 			'auth_callback' => static fn(): bool => current_user_can('edit_posts'),
 		]);
 	}
+
+	// Espone i campi Yoast principali via REST anche per le pagine
+	// (Yoast li registra solo per i post), così titolo/description
+	// sono gestibili via API su tutti i contenuti.
+	foreach (['_yoast_wpseo_metadesc', '_yoast_wpseo_title', '_yoast_wpseo_focuskw'] as $key) {
+		register_post_meta('page', $key, [
+			'show_in_rest'  => true,
+			'single'        => true,
+			'type'          => 'string',
+			'auth_callback' => static fn(): bool => current_user_can('edit_pages'),
+		]);
+	}
 }
 add_action('init', 'b2vibe_register_meta');
 
