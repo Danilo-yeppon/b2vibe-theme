@@ -9,7 +9,7 @@
 			</div>
 
 			<div class="b2v-footer__col">
-				<h4><?php esc_html_e('Servizi', 'b2vibe'); ?></h4>
+				<h2><?php esc_html_e('Servizi', 'b2vibe'); ?></h2>
 				<ul>
 					<li><a href="<?php echo esc_url(home_url('/ecommerce-management/')); ?>"><?php esc_html_e('Ecommerce Management', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/merchant-of-record/')); ?>"><?php esc_html_e('Merchant of Record', 'b2vibe'); ?></a></li>
@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="b2v-footer__col">
-				<h4><?php esc_html_e('Marketplace', 'b2vibe'); ?></h4>
+				<h2><?php esc_html_e('Marketplace', 'b2vibe'); ?></h2>
 				<ul>
 					<li><a href="<?php echo esc_url(home_url('/vendere-su-amazon/')); ?>">Amazon</a></li>
 					<li><a href="<?php echo esc_url(home_url('/vendere-su-ebay/')); ?>">eBay</a></li>
@@ -33,7 +33,7 @@
 			</div>
 
 			<div class="b2v-footer__col">
-				<h4><?php esc_html_e('Azienda', 'b2vibe'); ?></h4>
+				<h2><?php esc_html_e('Azienda', 'b2vibe'); ?></h2>
 				<ul>
 					<li><a href="<?php echo esc_url(home_url('/#chi-siamo')); ?>"><?php esc_html_e('Chi siamo', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'b2vibe'); ?></a></li>
@@ -44,7 +44,7 @@
 			</div>
 
 			<div class="b2v-footer__col">
-				<h4><?php esc_html_e('Contatti', 'b2vibe'); ?></h4>
+				<h2><?php esc_html_e('Contatti', 'b2vibe'); ?></h2>
 				<ul>
 					<li><a href="mailto:info@b2vibe.com">info@b2vibe.com</a></li>
 					<li><span class="b2v-text-muted">Sede Operativa: Via Santi 11/13</span></li>

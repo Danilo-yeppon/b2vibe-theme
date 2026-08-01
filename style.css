@@ -279,7 +279,7 @@ h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); font-weight: 700; }
 	max-width: 300px;
 }
 
-.b2v-footer__col h4 {
+.b2v-footer__col h2 {
 	font-size: 0.75rem;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
