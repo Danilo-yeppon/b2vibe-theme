@@ -191,6 +191,23 @@ add_action('after_setup_theme', 'b2vibe_clean_head');
  */
 add_filter('emoji_svg_url', '__return_false');
 
+/**
+ * Blocca gli auto-pingback: i link interni fra articoli generavano un
+ * pingback in moderazione a ogni pubblicazione. I ping verso siti terzi
+ * restano attivi.
+ */
+function b2vibe_no_self_ping(array &$links): void
+{
+	$home = get_option('home');
+
+	foreach ($links as $i => $link) {
+		if (strpos($link, $home) === 0) {
+			unset($links[$i]);
+		}
+	}
+}
+add_filter('pre_ping', 'b2vibe_no_self_ping');
+
 function b2vibe_nav_menu_css_class(array $classes): array
 {
 	return array_filter($classes, static fn(string $c): bool =>
