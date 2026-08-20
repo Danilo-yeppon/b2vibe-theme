@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.8.1');
+define('B2VIBE_VERSION', '1.8.2');
 
 function b2vibe_setup(): void
 {
@@ -259,6 +259,36 @@ function b2vibe_register_meta(): void
 	}
 }
 add_action('init', 'b2vibe_register_meta');
+
+/**
+ * REST helper per Polylang (free): assegna la lingua a un post/pagina e
+ * collega le coppie di traduzione, operazioni che Polylang non espone via API.
+ * POST /wp-json/b2vibe/v1/translation {post_id, lang, translations:{it:13,en:301}}
+ */
+add_action('rest_api_init', static function (): void {
+	register_rest_route('b2vibe/v1', '/translation', [
+		'methods'             => 'POST',
+		'permission_callback' => static fn(): bool => current_user_can('edit_pages'),
+		'callback'            => static function (WP_REST_Request $req) {
+			if (! function_exists('pll_set_post_language')) {
+				return new WP_Error('no_polylang', 'Polylang non attivo', ['status' => 500]);
+			}
+			$post_id = (int) $req['post_id'];
+			if ($post_id > 0 && $req['lang']) {
+				pll_set_post_language($post_id, sanitize_key($req['lang']));
+			}
+			$pairs = $req['translations'];
+			if (is_array($pairs) && $pairs !== []) {
+				pll_save_post_translations(array_map('intval', $pairs));
+			}
+			return [
+				'ok'   => true,
+				'post' => $post_id,
+				'lang' => $post_id > 0 ? pll_get_post_language($post_id) : null,
+			];
+		},
+	]);
+});
 
 /**
  * GitHub Theme Updater — checks for new versions on GitHub
