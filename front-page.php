@@ -179,7 +179,7 @@ get_header();
 			<a href="<?php echo esc_url(home_url('/ecommerce-management/')); ?>" class="b2v-card b2v-servizi__card">
 				<span class="b2v-servizi__num">01</span>
 				<h3><?php esc_html_e('Ecommerce Management', 'b2vibe'); ?></h3>
-				<p><?php esc_html_e('Gestione completa dei tuoi canali di vendita: listing, pricing, promozioni e ottimizzazione delle performance su ogni marketplace.', 'b2vibe'); ?></p>
+				<p><?php esc_html_e('Gestione completa dei tuoi canali di vendita: listing, pricing, promozioni e ottimizzazione delle performance su sito e marketplace.', 'b2vibe'); ?></p>
 				<span class="b2v-servizi__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
 			</a>
 
