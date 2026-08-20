@@ -288,6 +288,49 @@ add_action('rest_api_init', static function (): void {
 			];
 		},
 	]);
+
+	// Bootstrap una tantum: crea le lingue it/en e assegna l'italiano
+	// ai contenuti esistenti, senza passare dal wizard di Polylang.
+	register_rest_route('b2vibe/v1', '/pll-bootstrap', [
+		'methods'             => 'POST',
+		'permission_callback' => static fn(): bool => current_user_can('manage_options'),
+		'callback'            => static function () {
+			if (! function_exists('PLL') || ! class_exists('PLL_Admin_Model')) {
+				return new WP_Error('no_polylang', 'Polylang non attivo', ['status' => 500]);
+			}
+			$model = new PLL_Admin_Model(PLL()->options);
+			$made  = [];
+			if (empty($model->get_languages_list())) {
+				$it = $model->add_language(['name' => 'Italiano', 'slug' => 'it', 'locale' => 'it_IT', 'rtl' => 0, 'flag' => 'it', 'term_group' => 0]);
+				$en = $model->add_language(['name' => 'English', 'slug' => 'en', 'locale' => 'en_US', 'rtl' => 0, 'flag' => 'us', 'term_group' => 1]);
+				$made = ['it' => $it === true ? 'ok' : $it, 'en' => $en === true ? 'ok' : $en];
+			}
+			$opts = PLL()->options;
+			$opts['default_lang'] = 'it';
+			$opts['hide_default'] = 1;
+			$opts['force_lang']   = 1;
+			$opts['media_support'] = 0;
+			$model->clean_languages_cache();
+
+			// assegna l'italiano a tutto il contenuto senza lingua
+			$assigned = 0;
+			$ids = get_posts(['post_type' => ['post', 'page'], 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids',
+				'tax_query' => [['taxonomy' => 'language', 'operator' => 'NOT EXISTS']]]);
+			foreach ($ids as $id) {
+				pll_set_post_language((int) $id, 'it');
+				$assigned++;
+			}
+			$tids = get_terms(['taxonomy' => 'category', 'hide_empty' => false, 'fields' => 'ids']);
+			foreach ((array) $tids as $tid) {
+				if (! pll_get_term_language((int) $tid)) {
+					pll_set_term_language((int) $tid, 'it');
+				}
+			}
+			flush_rewrite_rules();
+			return ['ok' => true, 'languages' => $made, 'posts_assigned' => $assigned,
+				'list' => array_map(static fn($l) => $l->slug, $model->get_languages_list())];
+		},
+	]);
 });
 
 /**
