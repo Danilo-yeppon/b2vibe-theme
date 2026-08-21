@@ -11,11 +11,11 @@
 			<div class="b2v-footer__col">
 				<h2><?php esc_html_e('Servizi', 'b2vibe'); ?></h2>
 				<ul>
-					<li><a href="<?php echo esc_url(home_url('/ecommerce-management/')); ?>"><?php esc_html_e('Ecommerce Management', 'b2vibe'); ?></a></li>
-					<li><a href="<?php echo esc_url(home_url('/merchant-of-record/')); ?>"><?php esc_html_e('Merchant of Record', 'b2vibe'); ?></a></li>
-					<li><a href="<?php echo esc_url(home_url('/logistica-e-magazzino/')); ?>"><?php esc_html_e('Logistica e Magazzino', 'b2vibe'); ?></a></li>
-					<li><a href="<?php echo esc_url(home_url('/customer-care/')); ?>"><?php esc_html_e('Customer Care', 'b2vibe'); ?></a></li>
-					<li><a href="<?php echo esc_url(home_url('/cataloghi-premi-aziendali/')); ?>"><?php esc_html_e('Cataloghi Premi', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/ecommerce-management/')); ?>"><?php esc_html_e('Ecommerce Management', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/merchant-of-record/')); ?>"><?php esc_html_e('Merchant of Record', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/logistica-e-magazzino/')); ?>"><?php esc_html_e('Logistica e Magazzino', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/customer-care/')); ?>"><?php esc_html_e('Customer Care', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/cataloghi-premi-aziendali/')); ?>"><?php esc_html_e('Cataloghi Premi', 'b2vibe'); ?></a></li>
 				</ul>
 			</div>
 
@@ -35,9 +35,9 @@
 			<div class="b2v-footer__col">
 				<h2><?php esc_html_e('Azienda', 'b2vibe'); ?></h2>
 				<ul>
-					<li><a href="<?php echo esc_url(home_url('/#chi-siamo')); ?>"><?php esc_html_e('Chi siamo', 'b2vibe'); ?></a></li>
-					<li><a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'b2vibe'); ?></a></li>
-					<li><a href="<?php echo esc_url(home_url('/prenota-una-call/')); ?>"><?php esc_html_e('Contatti', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/') . '#chi-siamo'); ?>"><?php esc_html_e('Chi siamo', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/blog/')); ?>"><?php esc_html_e('Blog', 'b2vibe'); ?></a></li>
+					<li><a href="<?php echo esc_url(b2vibe_link('/prenota-una-call/')); ?>"><?php esc_html_e('Contatti', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>"><?php esc_html_e('Privacy Policy', 'b2vibe'); ?></a></li>
 					<li><a href="<?php echo esc_url(home_url('/cookie-policy/')); ?>"><?php esc_html_e('Cookie Policy', 'b2vibe'); ?></a></li>
 				</ul>

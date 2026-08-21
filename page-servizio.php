@@ -47,7 +47,7 @@ $benefits = $benefits ? json_decode($benefits, true) : [];
 				<div class="b2v-service__intro"><?php the_content(); ?></div>
 			<?php endif; ?>
 
-			<a href="<?php echo esc_url(home_url('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
+			<a href="<?php echo esc_url(b2vibe_link('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
 				<?php esc_html_e('Richiedi informazioni', 'b2vibe'); ?>
 				<span aria-hidden="true">&rarr;</span>
 			</a>
@@ -112,7 +112,7 @@ $benefits = $benefits ? json_decode($benefits, true) : [];
 				<span class="b2v-label"><?php esc_html_e('Inizia ora', 'b2vibe'); ?></span>
 				<h2><?php esc_html_e('Vuoi saperne di pi&ugrave;?', 'b2vibe'); ?></h2>
 				<p><?php esc_html_e('Prenota una call gratuita di 30 minuti e scopri come possiamo aiutare il tuo brand a crescere sui marketplace europei.', 'b2vibe'); ?></p>
-				<a href="<?php echo esc_url(home_url('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
+				<a href="<?php echo esc_url(b2vibe_link('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
 					<?php esc_html_e('Prenota la call di 30\'', 'b2vibe'); ?>
 					<span aria-hidden="true">&rarr;</span>
 				</a>

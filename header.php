@@ -12,7 +12,7 @@
 
 <header class="b2v-header" role="banner">
 	<div class="b2v-container b2v-header__inner">
-		<a href="<?php echo esc_url(home_url('/')); ?>" class="b2v-logo" rel="home">
+		<a href="<?php echo esc_url(b2vibe_link('/')); ?>" class="b2v-logo" rel="home">
 			<?php if (has_custom_logo()) : ?>
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
@@ -42,15 +42,16 @@
 			]); ?>
 		<?php else : ?>
 			<nav class="b2v-nav" role="navigation" aria-label="<?php esc_attr_e('Primary', 'b2vibe'); ?>">
-				<a href="<?php echo esc_url(home_url('/#chi-siamo')); ?>"><?php esc_html_e('Chi siamo', 'b2vibe'); ?></a>
-				<a href="<?php echo esc_url(home_url('/#servizi')); ?>"><?php esc_html_e('Servizi', 'b2vibe'); ?></a>
-				<a href="<?php echo esc_url(home_url('/#vantaggi')); ?>"><?php esc_html_e('Vantaggi', 'b2vibe'); ?></a>
+				<a href="<?php echo esc_url(b2vibe_link('/') . '#chi-siamo'); ?>"><?php esc_html_e('Chi siamo', 'b2vibe'); ?></a>
+				<a href="<?php echo esc_url(b2vibe_link('/') . '#servizi'); ?>"><?php esc_html_e('Servizi', 'b2vibe'); ?></a>
+				<a href="<?php echo esc_url(b2vibe_link('/') . '#vantaggi'); ?>"><?php esc_html_e('Vantaggi', 'b2vibe'); ?></a>
 				<a href="<?php echo esc_url(home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'b2vibe'); ?></a>
 			</nav>
 		<?php endif; ?>
 
 		<div class="b2v-header__cta">
-			<a href="<?php echo esc_url(home_url('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
+			<?php if (function_exists('b2vibe_lang_switcher')) { b2vibe_lang_switcher(); } ?>
+			<a href="<?php echo esc_url(b2vibe_link('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
 				<?php esc_html_e('Prenota una call', 'b2vibe'); ?>
 			</a>
 		</div>

@@ -27,7 +27,7 @@ get_header();
 		</p>
 
 		<div class="b2v-hero__actions">
-			<a href="<?php echo esc_url(home_url('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
+			<a href="<?php echo esc_url(b2vibe_link('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
 				<?php esc_html_e('Prenota una call di 30\'', 'b2vibe'); ?>
 				<span aria-hidden="true">&rarr;</span>
 			</a>
@@ -176,35 +176,35 @@ get_header();
 		<h2><?php esc_html_e('Un ecosistema completo per il tuo ecommerce.', 'b2vibe'); ?></h2>
 
 		<div class="b2v-servizi__grid">
-			<a href="<?php echo esc_url(home_url('/ecommerce-management/')); ?>" class="b2v-card b2v-servizi__card">
+			<a href="<?php echo esc_url(b2vibe_link('/ecommerce-management/')); ?>" class="b2v-card b2v-servizi__card">
 				<span class="b2v-servizi__num">01</span>
 				<h3><?php esc_html_e('Ecommerce Management', 'b2vibe'); ?></h3>
 				<p><?php esc_html_e('Gestione completa dei tuoi canali di vendita: listing, pricing, promozioni e ottimizzazione delle performance su sito e marketplace.', 'b2vibe'); ?></p>
 				<span class="b2v-servizi__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
 			</a>
 
-			<a href="<?php echo esc_url(home_url('/merchant-of-record/')); ?>" class="b2v-card b2v-servizi__card">
+			<a href="<?php echo esc_url(b2vibe_link('/merchant-of-record/')); ?>" class="b2v-card b2v-servizi__card">
 				<span class="b2v-servizi__num">02</span>
 				<h3><?php esc_html_e('Merchant of Record', 'b2vibe'); ?></h3>
 				<p><?php esc_html_e('Vendiamo per tuo conto come entit&agrave; fiscale. Gestiamo IVA, fatturazione e compliance in ogni paese europeo.', 'b2vibe'); ?></p>
 				<span class="b2v-servizi__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
 			</a>
 
-			<a href="<?php echo esc_url(home_url('/logistica-e-magazzino/')); ?>" class="b2v-card b2v-servizi__card">
+			<a href="<?php echo esc_url(b2vibe_link('/logistica-e-magazzino/')); ?>" class="b2v-card b2v-servizi__card">
 				<span class="b2v-servizi__num">03</span>
 				<h3><?php esc_html_e('Logistica e Magazzino', 'b2vibe'); ?></h3>
 				<p><?php esc_html_e('Magazzino certificato Amazon Prime a Paderno Dugnano. Picking, packing, spedizioni e gestione resi integrata.', 'b2vibe'); ?></p>
 				<span class="b2v-servizi__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
 			</a>
 
-			<a href="<?php echo esc_url(home_url('/customer-care/')); ?>" class="b2v-card b2v-servizi__card">
+			<a href="<?php echo esc_url(b2vibe_link('/customer-care/')); ?>" class="b2v-card b2v-servizi__card">
 				<span class="b2v-servizi__num">04</span>
 				<h3><?php esc_html_e('Customer Care', 'b2vibe'); ?></h3>
 				<p><?php esc_html_e('Assistenza pre e post vendita in 5 lingue con SLA stringenti. Gestiamo ogni interazione per proteggere la reputazione del brand.', 'b2vibe'); ?></p>
 				<span class="b2v-servizi__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
 			</a>
 
-			<a href="<?php echo esc_url(home_url('/cataloghi-premi-aziendali/')); ?>" class="b2v-card b2v-servizi__card">
+			<a href="<?php echo esc_url(b2vibe_link('/cataloghi-premi-aziendali/')); ?>" class="b2v-card b2v-servizi__card">
 				<span class="b2v-servizi__num">05</span>
 				<h3><?php esc_html_e('Cataloghi Premi e Incentive', 'b2vibe'); ?></h3>
 				<p><?php esc_html_e('Premi per campagne di incentivazione: catalogo su misura, raccolta ordini e spedizione diretta a ogni destinatario.', 'b2vibe'); ?></p>
@@ -330,7 +330,7 @@ endif;
 			<span class="b2v-label"><?php esc_html_e('Servizi', 'b2vibe'); ?></span>
 			<h2><?php esc_html_e('Valutiamo insieme l\'opportunit&agrave; di crescita.', 'b2vibe'); ?></h2>
 			<p><?php esc_html_e('Valutiamo insieme se esiste un\'opportunit&agrave; reale per il tuo brand. Senza impegno, solo numeri chiari.', 'b2vibe'); ?></p>
-			<a href="<?php echo esc_url(home_url('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
+			<a href="<?php echo esc_url(b2vibe_link('/prenota-una-call/')); ?>" class="b2v-btn b2v-btn--primary">
 				<?php esc_html_e('Prenota la call di 30\'', 'b2vibe'); ?>
 				<span aria-hidden="true">&rarr;</span>
 			</a>

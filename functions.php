@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.8.2');
+define('B2VIBE_VERSION', '1.8.3');
 
 function b2vibe_setup(): void
 {
@@ -107,7 +107,7 @@ function b2vibe_enqueue_assets(): void
 	}, 2);
 
 	// Load CF7 assets only on the contact page
-	if (! is_page('prenota-una-call')) {
+	if (! is_page(['prenota-una-call', 'book-a-call'])) {
 		wp_dequeue_style('contact-form-7');
 		wp_dequeue_script('contact-form-7');
 		wp_dequeue_script('wpcf7-recaptcha');
@@ -234,6 +234,75 @@ function b2vibe_excerpt_more(): string
 }
 add_filter('excerpt_more', 'b2vibe_excerpt_more');
 
+
+/**
+ * URL consapevole della lingua: dato un percorso IT, sulla versione EN
+ * restituisce l'URL della traduzione se esiste, altrimenti l'originale.
+ */
+function b2vibe_link(string $path): string
+{
+	$url = home_url($path);
+	if (! function_exists('pll_current_language') || pll_current_language() !== 'en') {
+		return $url;
+	}
+	$slug = trim((string) parse_url($path, PHP_URL_PATH), '/');
+	if ($slug === '') {
+		return function_exists('pll_home_url') ? pll_home_url('en') : $url;
+	}
+	$page = get_page_by_path($slug);
+	if ($page) {
+		$tr = pll_get_post($page->ID, 'en');
+		if ($tr) {
+			return get_permalink($tr);
+		}
+	}
+	return $url;
+}
+
+/**
+ * Selettore lingua minimale (IT | EN) per l'header.
+ */
+function b2vibe_lang_switcher(): void
+{
+	if (! function_exists('pll_the_languages')) {
+		return;
+	}
+	$langs = pll_the_languages(['raw' => 1, 'hide_if_empty' => 0]);
+	if (! is_array($langs) || count($langs) < 2) {
+		return;
+	}
+	echo '<div class="b2v-lang" aria-label="Language">';
+	foreach ($langs as $l) {
+		$current = ! empty($l['current_lang']);
+		$cls = 'b2v-lang__item' . ($current ? ' is-current' : '');
+		echo '<a class="' . esc_attr($cls) . '" href="' . esc_url($l['url']) . '" hreflang="' . esc_attr($l['slug']) . '">' . esc_html(strtoupper($l['slug'])) . '</a>';
+	}
+	echo '</div>';
+}
+
+/**
+ * Sulla versione EN traduce etichette e destinazioni del menu principale
+ * (le voci puntano alle ancore della home italiana).
+ */
+add_filter('wp_nav_menu_objects', static function (array $items): array {
+	if (! function_exists('pll_current_language') || pll_current_language() !== 'en') {
+		return $items;
+	}
+	$home = function_exists('pll_home_url') ? pll_home_url('en') : home_url('/en/');
+	$map  = [
+		'Chi siamo' => ['About us', $home . '#chi-siamo'],
+		'Servizi'   => ['Services', $home . '#servizi'],
+		'Vantaggi'  => ['Benefits', $home . '#vantaggi'],
+		'Blog'      => ['Blog', home_url('/blog/')],
+	];
+	foreach ($items as $item) {
+		if (isset($map[$item->title])) {
+			[$item->title, $item->url] = $map[$item->title];
+		}
+	}
+	return $items;
+});
+
 function b2vibe_register_meta(): void
 {
 	$meta_keys = ['b2v_service_label', 'b2v_service_intro', 'b2v_service_features', 'b2v_service_benefits'];
@@ -286,6 +355,70 @@ add_action('rest_api_init', static function (): void {
 				'post' => $post_id,
 				'lang' => $post_id > 0 ? pll_get_post_language($post_id) : null,
 			];
+		},
+	]);
+
+
+	// Crea (una tantum) il form Contact Form 7 inglese per /en/book-a-call/.
+	register_rest_route('b2vibe/v1', '/cf7-en', [
+		'methods'             => 'POST',
+		'permission_callback' => static fn(): bool => current_user_can('manage_options'),
+		'callback'            => static function () {
+			if (! class_exists('WPCF7_ContactForm')) {
+				return new WP_Error('no_cf7', 'Contact Form 7 non attivo', ['status' => 500]);
+			}
+			$existing = get_posts(['post_type' => 'wpcf7_contact_form', 'title' => 'Book a Call (EN)', 'numberposts' => 1]);
+			if ($existing) {
+				$cf = WPCF7_ContactForm::get_instance($existing[0]->ID);
+				return ['ok' => true, 'id' => $cf->id(), 'hash' => $cf->hash(), 'existing' => true];
+			}
+			$cf    = WPCF7_ContactForm::get_template(['title' => 'Book a Call (EN)', 'locale' => 'en_US']);
+			$props = $cf->get_properties();
+			$props['form'] = '<div class="b2v-form-row">' . "
+"
+				. '[text* your-name placeholder "Full name"]' . "
+" . '</div>' . "
+"
+				. '<div class="b2v-form-row">' . "
+"
+				. '[email* your-email placeholder "Business email"]' . "
+" . '</div>' . "
+"
+				. '<div class="b2v-form-row">' . "
+"
+				. '[text* your-company placeholder "Company"]' . "
+" . '</div>' . "
+"
+				. '<div class="b2v-form-row">' . "
+"
+				. '[tel your-phone placeholder "Phone (optional)"]' . "
+" . '</div>' . "
+"
+				. '<div class="b2v-form-row">' . "
+"
+				. '[textarea your-message placeholder "Tell us briefly about your project..."]' . "
+" . '</div>' . "
+"
+				. '<div class="b2v-form-row">' . "
+"
+				. '[submit class:b2v-btn class:b2v-btn--primary "Book the call"]' . "
+" . '</div>';
+			$props['mail']['subject']   = '[B2Vibe] New call request (EN) from [your-name]';
+			$props['mail']['recipient'] = 'info@b2vibe.com';
+			$props['mail']['body']      = "Name: [your-name]
+Email: [your-email]
+Company: [your-company]
+Phone: [your-phone]
+
+Message:
+[your-message]";
+			$props['messages']['mail_sent_ok']     = 'Thank you! Your request has been sent - we will get back to you within one business day.';
+			$props['messages']['mail_sent_ng']     = 'Something went wrong while sending. Please email us at info@b2vibe.com.';
+			$props['messages']['validation_error'] = 'Please check the highlighted fields and try again.';
+			$props['messages']['invalid_required'] = 'This field is required.';
+			$cf->set_properties($props);
+			$cf->save();
+			return ['ok' => true, 'id' => $cf->id(), 'hash' => $cf->hash()];
 		},
 	]);
 
