@@ -21,13 +21,39 @@ get_header();
 
 while (have_posts()) : the_post();
 
-$label    = get_post_meta(get_the_ID(), 'b2v_service_label', true);
-$intro    = get_post_meta(get_the_ID(), 'b2v_service_intro', true);
+$label    = (string) get_post_meta(get_the_ID(), 'b2v_service_label', true);
+$intro    = (string) get_post_meta(get_the_ID(), 'b2v_service_intro', true);
 $features = get_post_meta(get_the_ID(), 'b2v_service_features', true);
 $benefits = get_post_meta(get_the_ID(), 'b2v_service_benefits', true);
 
-$features = $features ? json_decode($features, true) : [];
-$benefits = $benefits ? json_decode($benefits, true) : [];
+// Le meta possono arrivare come stringa JSON (post meta manuale) oppure come array
+// (ACF): normalizziamo entrambi i casi e scartiamo i valori non validi, così che
+// una meta malformata nasconda la sezione invece di generare un errore fatale.
+$features = is_string($features) ? json_decode($features, true) : $features;
+$benefits = is_string($benefits) ? json_decode($benefits, true) : $benefits;
+
+$features = is_array($features) ? array_values(array_filter($features, 'is_array')) : [];
+$benefits = is_array($benefits) ? array_values(array_filter($benefits, 'is_scalar')) : [];
+
+$features = array_map(
+	static function (array $feat): array {
+		return [
+			'title' => is_scalar($feat['title'] ?? null) ? (string) $feat['title'] : '',
+			'text'  => is_scalar($feat['text'] ?? null) ? (string) $feat['text'] : '',
+		];
+	},
+	$features
+);
+
+$benefits = array_map(static fn($benefit): string => (string) $benefit, $benefits);
+
+// Contenuto libero della pagina, ripulito da commenti di blocco e markup vuoto.
+$body_raw  = preg_replace('/<!--.*?-->/s', '', (string) get_the_content());
+$has_body  = trim(strip_tags((string) $body_raw, '<img><video><iframe><table>')) !== '';
+
+// Senza b2v_service_intro il contenuto della pagina fa da introduzione nell'hero:
+// in quel caso la sezione "Approfondimento" va omessa per non duplicarlo.
+$show_body = $has_body && $intro !== '';
 ?>
 
 <main class="b2v-content b2v-service">
@@ -41,9 +67,9 @@ $benefits = $benefits ? json_decode($benefits, true) : [];
 
 			<h1><?php the_title(); ?></h1>
 
-			<?php if ($intro) : ?>
+			<?php if ($intro !== '') : ?>
 				<p class="b2v-service__intro"><?php echo esc_html($intro); ?></p>
-			<?php else : ?>
+			<?php elseif ($has_body) : ?>
 				<div class="b2v-service__intro"><?php the_content(); ?></div>
 			<?php endif; ?>
 
@@ -65,8 +91,8 @@ $benefits = $benefits ? json_decode($benefits, true) : [];
 				<?php foreach ($features as $i => $feat) : ?>
 				<div class="b2v-card b2v-service__feature-card">
 					<span class="b2v-service__feature-num"><?php echo esc_html(str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT)); ?></span>
-					<h3><?php echo esc_html($feat['title'] ?? ''); ?></h3>
-					<p><?php echo esc_html($feat['text'] ?? ''); ?></p>
+					<h3><?php echo esc_html($feat['title']); ?></h3>
+					<p><?php echo esc_html($feat['text']); ?></p>
 				</div>
 				<?php endforeach; ?>
 			</div>
@@ -97,7 +123,7 @@ $benefits = $benefits ? json_decode($benefits, true) : [];
 	<?php endif; ?>
 
 	<!-- Approfondimento (contenuto libero della pagina) -->
-	<?php if (trim(get_the_content()) !== '') : ?>
+	<?php if ($show_body) : ?>
 	<section class="b2v-section b2v-service__content">
 		<div class="b2v-container b2v-content--narrow b2v-content__body">
 			<?php the_content(); ?>

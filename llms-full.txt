@@ -44,7 +44,7 @@ Gestione completa dei canali di vendita online del brand:
 
 - **Listing e catalogo**: Creazione e ottimizzazione delle schede prodotto su ogni marketplace, con contenuti localizzati per ogni mercato.
 - **Pricing dinamico**: Strategie di prezzo competitive basate su analisi di mercato, marginalità e posizionamento del brand.
-- **Promozioni e advertising**: Gestione delle campagne promozionali e pubblicitarie su ogni piattaforma (Amazon Ads, eBay Promoted Listings, ecc.).
+- **Promozioni e advertising**: Gestione delle campagne promozionali e pubblicitarie su ogni piattaforma (Amazon Ads, eBay Promoted Listings, ecc.) e gestione dei canali social del brand.
 - **Performance monitoring**: Dashboard e reportistica sulle vendite, conversioni e KPI per ogni canale.
 - **Ottimizzazione continua**: A/B testing, SEO marketplace, gestione recensioni e reputazione del seller.
 
