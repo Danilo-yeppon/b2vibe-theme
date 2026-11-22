@@ -258,6 +258,16 @@ add_filter('excerpt_more', 'b2vibe_excerpt_more');
 
 add_filter('get_the_archive_title_prefix', '__return_empty_string');
 
+// Meta description unica sulle pagine paginate (es. /category/x/page/2/).
+add_filter('wpseo_metadesc', static function ($desc) {
+	if (is_paged() && $desc) {
+		$lang  = function_exists('pll_current_language') ? pll_current_language() : 'it';
+		$label = ('en' === $lang) ? 'Page %d' : 'Pagina %d';
+		$desc .= ' - ' . sprintf($label, (int) get_query_var('paged'));
+	}
+	return $desc;
+});
+
 /**
  * URL consapevole della lingua: dato un percorso IT, sulla versione EN
  * restituisce l'URL della traduzione se esiste, altrimenti l'originale.
