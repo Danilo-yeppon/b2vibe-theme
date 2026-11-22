@@ -508,6 +508,15 @@ function b2vibe_github_updater($transient)
 			'url'         => "https://github.com/{$repo}",
 			'package'     => $release['zipball_url'] ?? "https://api.github.com/repos/{$repo}/zipball/{$release['tag_name']}",
 		];
+	} else {
+		// Registra il tema in no_update: senza questo WordPress non mostra
+		// il link «Abilita aggiornamenti automatici» per un tema non su wordpress.org.
+		$transient->no_update[$theme] = [
+			'theme'       => $theme,
+			'new_version' => $current,
+			'url'         => "https://github.com/{$repo}",
+			'package'     => '',
+		];
 	}
 
 	return $transient;
@@ -517,14 +526,16 @@ add_filter('site_transient_update_themes', 'b2vibe_github_updater');
 /**
  * Fix GitHub ZIP folder name (removes commit hash suffix)
  */
-function b2vibe_upgrader_source(string $source, string $remote_source, $upgrader): string
+function b2vibe_upgrader_source(string $source, string $remote_source, $upgrader, array $hook_extra = []): string
 {
-	if (! isset($upgrader->skin) || ! is_object($upgrader->skin)) {
-		return $source;
+	// Vale sia per l'aggiornamento manuale sia per quello automatico in background,
+	// dove lo skin non ha theme_info: ci si basa su hook_extra['theme'].
+	$is_ours = ($hook_extra['theme'] ?? '') === get_stylesheet();
+	if (! $is_ours && isset($upgrader->skin) && is_object($upgrader->skin)) {
+		$theme_info = $upgrader->skin->theme_info ?? null;
+		$is_ours    = $theme_info && is_object($theme_info) && $theme_info->get('Name') === 'B2Vibe';
 	}
-
-	$theme_info = $upgrader->skin->theme_info ?? null;
-	if (! $theme_info || ! is_object($theme_info) || $theme_info->get('Name') !== 'B2Vibe') {
+	if (! $is_ours) {
 		return $source;
 	}
 
@@ -537,7 +548,18 @@ function b2vibe_upgrader_source(string $source, string $remote_source, $upgrader
 
 	return $corrected;
 }
-add_filter('upgrader_source_selection', 'b2vibe_upgrader_source', 10, 3);
+add_filter('upgrader_source_selection', 'b2vibe_upgrader_source', 10, 4);
+
+/**
+ * Aggiornamenti automatici sempre attivi per questo tema: ogni release GitHub
+ * viene installata da WordPress in background, senza clic in wp-admin.
+ */
+add_filter('auto_update_theme', static function ($update, $item) {
+	if (is_object($item) && ($item->theme ?? '') === get_stylesheet()) {
+		return true;
+	}
+	return $update;
+}, 10, 2);
 
 /**
  * JSON-LD Structured Data — outputs schema.org markup in <head>.
