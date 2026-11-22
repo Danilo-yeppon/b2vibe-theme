@@ -6,7 +6,7 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.9.0');
+define('B2VIBE_VERSION', '1.9.1');
 
 require_once __DIR__ . '/inc/antispam.php';
 
@@ -117,6 +117,26 @@ function b2vibe_enqueue_assets(): void
 	}
 }
 add_action('wp_enqueue_scripts', 'b2vibe_enqueue_assets', 20);
+
+/**
+ * Invia a GA4 l'evento generate_lead al successo di Contact Form 7.
+ * Se gtag non è ancora definito (script differito), lo stub mette l'evento in coda su dataLayer.
+ */
+function b2vibe_cf7_lead_tracking(): void
+{
+	if (! is_page(['prenota-una-call', 'book-a-call'])) {
+		return;
+	}
+
+	echo '<script>'
+		. 'document.addEventListener("wpcf7mailsent",function(e){'
+		. 'window.dataLayer=window.dataLayer||[];'
+		. 'if(typeof gtag!=="function"){window.gtag=function(){dataLayer.push(arguments);};}'
+		. 'gtag("event","generate_lead",{form_id:String(e.detail.contactFormId)});'
+		. '});'
+		. '</script>' . "\n";
+}
+add_action('wp_footer', 'b2vibe_cf7_lead_tracking');
 
 /**
  * Performance: Remove WordPress emoji scripts & styles (saves ~15 KB).
@@ -236,6 +256,7 @@ function b2vibe_excerpt_more(): string
 }
 add_filter('excerpt_more', 'b2vibe_excerpt_more');
 
+add_filter('get_the_archive_title_prefix', '__return_empty_string');
 
 /**
  * URL consapevole della lingua: dato un percorso IT, sulla versione EN
@@ -262,6 +283,35 @@ function b2vibe_link(string $path): string
 }
 
 /**
+ * Pagine marketplace pubblicate il cui slug inizia per vendere-su-.
+ * Polylang filtra automaticamente per la lingua corrente.
+ *
+ * @return list<\WP_Post>
+ */
+function b2vibe_get_marketplace_pages(): array
+{
+	$query = new WP_Query([
+		'post_type'              => 'page',
+		'post_status'            => 'publish',
+		'posts_per_page'         => 50,
+		'orderby'                => 'title',
+		'order'                  => 'ASC',
+		'no_found_rows'          => true,
+		'update_post_meta_cache' => false,
+		'update_post_term_cache' => false,
+	]);
+
+	$pages = [];
+	foreach ($query->posts as $page) {
+		if ($page instanceof WP_Post && str_starts_with($page->post_name, 'vendere-su-')) {
+			$pages[] = $page;
+		}
+	}
+
+	return $pages;
+}
+
+/**
  * Selettore lingua minimale (IT | EN) per l'header.
  */
 function b2vibe_lang_switcher(): void
@@ -281,6 +331,13 @@ function b2vibe_lang_switcher(): void
 	}
 	echo '</div>';
 }
+
+add_filter('pll_rel_hreflang_attributes', static function (array $h): array {
+	if (isset($h['it']) && ! isset($h['x-default'])) {
+		$h['x-default'] = $h['it'];
+	}
+	return $h;
+});
 
 /**
  * Sulla versione EN traduce etichette e destinazioni del menu principale
@@ -305,6 +362,70 @@ add_filter('wp_nav_menu_objects', static function (array $items): array {
 	return $items;
 });
 
+/**
+ * Normalizza il post meta b2v_service_faq come JSON [{q,a}, ...].
+ */
+function b2vibe_sanitize_service_faq(mixed $value): string
+{
+	if (is_string($value)) {
+		$value = json_decode($value, true);
+	}
+	if (! is_array($value)) {
+		return '';
+	}
+
+	$clean = [];
+	foreach ($value as $item) {
+		if (! is_array($item)) {
+			continue;
+		}
+		$q = sanitize_text_field((string) ($item['q'] ?? ''));
+		$a = sanitize_textarea_field((string) ($item['a'] ?? ''));
+		if ($q === '' || $a === '') {
+			continue;
+		}
+		$clean[] = ['q' => $q, 'a' => $a];
+	}
+
+	if ($clean === []) {
+		return '';
+	}
+
+	$json = wp_json_encode($clean, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+	return is_string($json) ? $json : '';
+}
+
+/**
+ * @return list<array{q: string, a: string}>
+ */
+function b2vibe_get_service_faq(int $post_id): array
+{
+	$raw = get_post_meta($post_id, 'b2v_service_faq', true);
+	if (! is_string($raw) || $raw === '') {
+		return [];
+	}
+
+	$items = json_decode($raw, true);
+	if (! is_array($items)) {
+		return [];
+	}
+
+	$out = [];
+	foreach ($items as $item) {
+		if (! is_array($item)) {
+			continue;
+		}
+		$q = trim((string) ($item['q'] ?? ''));
+		$a = trim((string) ($item['a'] ?? ''));
+		if ($q === '' || $a === '') {
+			continue;
+		}
+		$out[] = ['q' => $q, 'a' => $a];
+	}
+
+	return $out;
+}
+
 function b2vibe_register_meta(): void
 {
 	$meta_keys = ['b2v_service_label', 'b2v_service_intro', 'b2v_service_features', 'b2v_service_benefits'];
@@ -316,6 +437,14 @@ function b2vibe_register_meta(): void
 			'auth_callback' => static fn(): bool => current_user_can('edit_posts'),
 		]);
 	}
+
+	register_post_meta('page', 'b2v_service_faq', [
+		'show_in_rest'      => true,
+		'single'            => true,
+		'type'              => 'string',
+		'sanitize_callback' => 'b2vibe_sanitize_service_faq',
+		'auth_callback'     => static fn(): bool => current_user_can('edit_posts'),
+	]);
 
 	// Espone i campi Yoast principali via REST anche per le pagine
 	// (Yoast li registra solo per i post), così titolo/description
@@ -566,16 +695,18 @@ add_filter('auto_update_theme', static function ($update, $item) {
  */
 function b2vibe_jsonld(): void
 {
-	$schema = [];
+	$schema   = [];
+	$language = get_bloginfo('language');
+	$home     = trailingslashit((string) get_option('home'));
 
 	// WebSite schema (all pages)
 	$schema[] = [
 		'@type'           => 'WebSite',
 		'@id'             => home_url('/#website'),
-		'url'             => home_url('/'),
+		'url'             => $home,
 		'name'            => 'B2Vibe',
 		'description'     => 'E-commerce Full Outsourcing & Merchant of Record',
-		'inLanguage'      => 'it-IT',
+		'inLanguage'      => $language,
 		'publisher'       => ['@id' => home_url('/#organization')],
 	];
 
@@ -587,9 +718,9 @@ function b2vibe_jsonld(): void
 		'url'         => home_url('/'),
 		'logo'        => [
 			'@type'  => 'ImageObject',
-			'url'    => get_template_directory_uri() . '/assets/img/logo-b2vibe.png',
-			'width'  => 160,
-			'height' => 24,
+			'url'    => get_template_directory_uri() . '/assets/img/icon-512.png',
+			'width'  => 512,
+			'height' => 512,
 		],
 		'description' => 'E-commerce Full Outsourcing & Merchant of Record. Gestiamo la complessità per far crescere il tuo brand sui marketplace europei.',
 		'email'       => 'info@b2vibe.com',
@@ -635,7 +766,7 @@ function b2vibe_jsonld(): void
 	];
 
 	// Contact page
-	if (is_page('prenota-una-call')) {
+	if (is_page(['prenota-una-call', 'book-a-call'])) {
 		$schema[] = [
 			'@type'      => 'ContactPage',
 			'@id'        => get_permalink() . '#webpage',
@@ -643,7 +774,7 @@ function b2vibe_jsonld(): void
 			'name'       => get_the_title(),
 			'isPartOf'   => ['@id' => home_url('/#website')],
 			'about'      => ['@id' => home_url('/#organization')],
-			'inLanguage' => 'it-IT',
+			'inLanguage' => $language,
 		];
 	}
 
@@ -662,6 +793,24 @@ function b2vibe_jsonld(): void
 			],
 			'serviceType' => get_the_title(),
 		];
+
+		$faq_items = b2vibe_get_service_faq((int) get_the_ID());
+		if ($faq_items !== []) {
+			$schema[] = [
+				'@type'      => 'FAQPage',
+				'@id'        => get_permalink() . '#faq',
+				'mainEntity' => array_map(static function (array $item): array {
+					return [
+						'@type'          => 'Question',
+						'name'           => $item['q'],
+						'acceptedAnswer' => [
+							'@type' => 'Answer',
+							'text'  => $item['a'],
+						],
+					];
+				}, $faq_items),
+			];
+		}
 	}
 
 	// Single blog posts: Article
@@ -683,7 +832,7 @@ function b2vibe_jsonld(): void
 				'url'   => home_url('/'),
 			],
 			'publisher'        => ['@id' => home_url('/#organization')],
-			'inLanguage'       => 'it-IT',
+			'inLanguage'       => $language,
 		];
 	}
 
@@ -704,11 +853,15 @@ function b2vibe_jsonld(): void
 		$crumbs = [
 			['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => home_url('/')],
 		];
-		$pos = 2;
+		$pos      = 2;
+		$blog_url = get_permalink((int) get_option('page_for_posts')) ?: home_url('/blog/');
 
 		if (is_singular('post')) {
-			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos++, 'name' => 'Blog', 'item' => get_permalink(get_option('page_for_posts'))];
+			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos++, 'name' => 'Blog', 'item' => $blog_url];
 			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos, 'name' => get_the_title()];
+		} elseif (is_category()) {
+			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos++, 'name' => 'Blog', 'item' => $blog_url];
+			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos, 'name' => single_cat_title('', false)];
 		} elseif (is_home()) {
 			$crumbs[] = ['@type' => 'ListItem', 'position' => $pos, 'name' => 'Blog'];
 		} elseif (is_page()) {
@@ -717,7 +870,7 @@ function b2vibe_jsonld(): void
 
 		$schema[] = [
 			'@type'           => 'BreadcrumbList',
-			'@id'             => get_permalink() . '#breadcrumb',
+			'@id'             => (is_singular() ? get_permalink() : get_pagenum_link(1)) . '#breadcrumb',
 			'itemListElement' => $crumbs,
 		];
 	}

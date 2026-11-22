@@ -11,6 +11,7 @@
  *   b2v_service_intro   — paragrafo introduttivo
  *   b2v_service_features — JSON array di feature [{title, text, icon}]
  *   b2v_service_benefits — JSON array di benefit stringhe
+ *   b2v_service_faq      — JSON array di FAQ [{q, a}]
  *
  * @package B2Vibe
  */
@@ -101,6 +102,27 @@ $benefits = $benefits ? json_decode($benefits, true) : [];
 	<section class="b2v-section b2v-service__content">
 		<div class="b2v-container b2v-content--narrow b2v-content__body">
 			<?php the_content(); ?>
+		</div>
+	</section>
+	<?php endif; ?>
+
+	<!-- FAQ -->
+	<?php
+	$faq_items = b2vibe_get_service_faq((int) get_the_ID());
+	if ($faq_items !== []) :
+	?>
+	<section class="b2v-section b2v-service__faq">
+		<div class="b2v-container">
+			<span class="b2v-label"><?php esc_html_e('FAQ', 'b2vibe'); ?></span>
+			<h2><?php esc_html_e('Domande frequenti', 'b2vibe'); ?></h2>
+			<div class="b2v-faq-list">
+				<?php foreach ($faq_items as $faq_item) : ?>
+				<details class="b2v-faq">
+					<summary><?php echo esc_html($faq_item['q']); ?></summary>
+					<div><?php echo esc_html($faq_item['a']); ?></div>
+				</details>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</section>
 	<?php endif; ?>

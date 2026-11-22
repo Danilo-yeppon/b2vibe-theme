@@ -51,6 +51,7 @@
 	text-transform: uppercase;
 	color: var(--b2v-accent);
 	margin-bottom: 32px;
+	line-height: 1.4;
 }
 
 .b2v-hero__badge::before {
@@ -67,21 +68,22 @@
 	50% { opacity: 0.3; }
 }
 
-/* H1 — Raleway 900, 88px on desktop */
-.b2v-hero h1 {
+/* Title — Raleway 900, 88px on desktop (was the H1) */
+.b2v-hero__title {
 	font-size: clamp(2.5rem, 6.5vw, 88px);
 	font-weight: 900;
 	letter-spacing: -0.01em;
 	line-height: 1.05;
 	margin-bottom: 28px;
+	color: var(--b2v-text);
 }
 
-.b2v-hero h1 .b2v-accent {
+.b2v-hero__title .b2v-accent {
 	color: var(--b2v-accent);
 }
 
 /* Scramble: prevent layout shift while hidden */
-.b2v-hero h1 [data-scramble] {
+.b2v-hero__title [data-scramble] {
 	display: inline-block;
 	min-width: 1ch;
 }
@@ -405,9 +407,44 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 	border-color: var(--b2v-accent-dim);
 }
 
-/* --- 8. ULTIMI ARTICOLI --- */
+/* --- 8. MARKETPLACE --- */
+.b2v-marketplace h2 {
+	margin-bottom: 48px;
+	max-width: 600px;
+}
+
+.b2v-marketplace__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--b2v-gap);
+}
+
+a.b2v-marketplace__card {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+	padding: 28px 32px;
+	transition: border-color 0.2s ease;
+}
+
+a.b2v-marketplace__card:hover {
+	opacity: 1;
+	border-color: var(--b2v-accent-dim);
+}
+
+.b2v-marketplace__card h3 {
+	margin-bottom: 12px;
+}
+
+.b2v-marketplace__link {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--b2v-accent);
+}
+
+/* --- 9. ULTIMI ARTICOLI --- */
 .b2v-latest {
-	background-color: var(--b2v-bg-alt);
+	background-color: var(--b2v-bg);
 }
 
 .b2v-latest__header {
@@ -422,7 +459,7 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 	margin-bottom: 0;
 }
 
-/* --- 9. CTA FINALE --- */
+/* --- 10. CTA FINALE --- */
 .b2v-cta-final {
 	padding-block: var(--b2v-section-py);
 	background-color: var(--b2v-bg);
@@ -545,7 +582,7 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 		min-height: auto;
 	}
 
-	.b2v-hero h1 {
+	.b2v-hero__title {
 		font-size: clamp(2rem, 8vw, 3rem);
 	}
 
@@ -564,6 +601,10 @@ a.b2v-servizi__card:hover .b2v-servizi__link {
 	}
 
 	.b2v-servizi__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.b2v-marketplace__grid {
 		grid-template-columns: 1fr;
 	}
 
