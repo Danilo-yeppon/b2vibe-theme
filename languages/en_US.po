@@ -1,0 +1,323 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: b2vibe\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+
+msgid "A chi ci rivolgiamo"
+msgstr "Who we work with"
+
+msgid "Analisi gratuita del tuo potenziale"
+msgstr "Free assessment of your potential"
+
+msgid "Anni di esperienza"
+msgstr "Years of experience"
+
+msgid "Apertura e gestione IVA estere"
+msgstr "Foreign VAT registration and filing"
+
+msgid "Articoli e approfondimenti"
+msgstr "Articles and insights"
+
+msgid "Assistenza pre e post vendita in 5 lingue con SLA stringenti. Gestiamo ogni interazione per proteggere la reputazione del brand."
+msgstr "Pre- and post-sale support in 5 languages with strict SLAs. We handle every interaction to protect your brand's reputation."
+
+msgid "Azienda"
+msgstr "Company"
+
+msgid "Aziende con cataloghi ampi che necessitano di un partner per la gestione multicanale scalabile e conforme."
+msgstr "Companies with large catalogues that need a partner for scalable, compliant multichannel management."
+
+msgid "Aziende manifatturiere che vogliono vendere direttamente al consumatore finale sui principali canali europei."
+msgstr "Manufacturers that want to sell directly to end consumers on Europe's main channels."
+
+msgid "B2Vibe"
+msgstr "B2Vibe"
+
+msgid "B2Vibe nasce da una costola di Yeppon, uno dei principali ecommerce italiani. In oltre 15 anni abbiamo spedito pi&ugrave; di 1 milione di ordini in tutta Europa, affrontando ogni sfida operativa: logistica, fiscalit&agrave; internazionale, compliance e customer care multilingua. Oggi mettiamo tutta questa esperienza al servizio di altre aziende che vogliono vendere online senza reinventare la ruota."
+msgstr "B2Vibe was born out of Yeppon, one of Italy's leading ecommerce players. In over 15 years we have shipped more than 1 million orders across Europe, handling every operational challenge: logistics, international tax, compliance and multilingual customer care. Today we put all that experience to work for companies that want to sell online without reinventing the wheel."
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Brand D2C"
+msgstr "D2C brands"
+
+msgid "Call con un esperto marketplace"
+msgstr "Call with a marketplace expert"
+
+msgid "Canali gestiti"
+msgstr "Channels we manage"
+
+msgid "Cataloghi Premi"
+msgstr "Reward Catalogues"
+
+msgid "Cataloghi Premi e Incentive"
+msgstr "Reward &amp; Incentive Catalogues"
+
+msgid "Chi siamo"
+msgstr "About us"
+
+msgid "Ci hanno scelto"
+msgstr "They chose us"
+
+msgid "Contatti"
+msgstr "Contact"
+
+msgid "Cookie Policy"
+msgstr "Cookie Policy"
+
+msgid "Cosa include"
+msgstr "What's included"
+
+msgid "Customer Care"
+msgstr "Customer Care"
+
+msgid "Da Yeppon a B2Vibe: 15 anni di ecommerce, ora al servizio del tuo brand."
+msgstr "From Yeppon to B2Vibe: 15 years of ecommerce, now working for your brand."
+
+msgid "Dal nostro blog"
+msgstr "From our blog"
+
+msgid "Domande frequenti"
+msgstr "Frequently asked questions"
+
+msgid "E-commerce Full Outsourcing & Merchant of Record. Gestiamo la complessit&agrave; per far crescere il tuo brand."
+msgstr "E-commerce Full Outsourcing &amp; Merchant of Record. We manage the complexity so your brand can grow."
+
+msgid "E-commerce Service Provider, Full Outsourcing Multicanale"
+msgstr "E-commerce Service Provider, Full Multichannel Outsourcing"
+
+msgid "Ecommerce Management"
+msgstr "Ecommerce Management"
+
+msgid "Ecommerce multicanale, logistica, fiscalit&agrave; e customer care"
+msgstr "Multichannel ecommerce, logistics, tax and customer care"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Gestione burocrazia e compliance"
+msgstr "Red tape and compliance handling"
+
+msgid "Gestione completa dei tuoi canali di vendita: listing, pricing, promozioni e ottimizzazione delle performance su sito e marketplace."
+msgstr "Complete management of your sales channels: listing, pricing, promotions and performance optimisation across your site and marketplaces."
+
+msgid "Gestione in-house vs. Gestione B2Vibe."
+msgstr "In-house vs. B2Vibe management."
+
+msgid "IT e tech stack multicanale"
+msgstr "IT and multichannel tech stack"
+
+msgid "Il partner ideale per chi vuole crescere online, senza complicazioni."
+msgstr "The right partner for growing online, without the complications."
+
+msgid "Il servizio nel dettaglio"
+msgstr "The service in detail"
+
+msgid "In-house"
+msgstr "In-house"
+
+msgid "Incluso"
+msgstr "Included"
+
+msgid "Inizia ora"
+msgstr "Start now"
+
+msgid "La nostra storia"
+msgstr "Our story"
+
+msgid "La pagina che stai cercando non esiste o &egrave; stata spostata."
+msgstr "The page you are looking for does not exist or has been moved."
+
+msgid "Lavoriamo con brand e produttori che vogliono espandersi sui marketplace europei senza moltiplicare team e costi interni."
+msgstr "We work with brands and manufacturers that want to expand across European marketplaces without multiplying internal teams and costs."
+
+msgid "Lingue di assistenza"
+msgstr "Support languages"
+
+msgid "Logistica e Magazzino"
+msgstr "Logistics &amp; Warehousing"
+
+msgid "Magazzino certificato Amazon Prime a Paderno Dugnano. Picking, packing, spedizioni e gestione resi integrata."
+msgstr "Amazon Prime certified warehouse near Milan. Picking, packing, shipping and integrated returns management."
+
+msgid "Making sales"
+msgstr "Making sales"
+
+msgid "Marchi con un proprio ecommerce che vogliono espandersi sui marketplace senza gestire la complessit&agrave; operativa."
+msgstr "Brands with their own ecommerce that want to expand to marketplaces without handling the operational complexity."
+
+msgid "Marketplace"
+msgstr "Marketplaces"
+
+msgid "Marketplace gestiti"
+msgstr "Marketplaces managed"
+
+msgid "Marketplace partner"
+msgstr "Marketplace partners"
+
+msgid "Merchant of Record"
+msgstr "Merchant of Record"
+
+msgid "Nati da 15+ anni di esperienza Yeppon e oltre 1 milione di ordini spediti in Europa. Oggi mettiamo questa competenza al servizio del tuo brand, gestendo ecommerce multicanale, logistica, fiscalit&agrave; e customer care."
+msgstr "Built on 15+ years of Yeppon experience and over 1 million orders shipped across Europe. Today we put that expertise to work for your brand, managing multichannel ecommerce, logistics, tax and customer care."
+
+msgid "Nessun articolo ancora pubblicato. I contenuti arriveranno presto!"
+msgstr "No articles published yet. Content is coming soon!"
+
+msgid "Nessun articolo trovato."
+msgstr "No articles found."
+
+msgid "Nessun contenuto trovato."
+msgstr "No content found."
+
+msgid "Nessun impegno, solo dati concreti"
+msgstr "No commitment, just hard data"
+
+msgid "Non incluso"
+msgstr "Not included"
+
+msgid "Ordini spediti in Europa"
+msgstr "Orders shipped across Europe"
+
+msgid "Pagina non trovata"
+msgstr "Page not found"
+
+msgid "Perch&eacute; B2Vibe"
+msgstr "Why B2Vibe"
+
+msgid "Perch&eacute; scegliere %s con B2Vibe"
+msgstr "Why choose %s with B2Vibe"
+
+msgid "Personale amministrativo / logistica"
+msgstr "Admin / logistics staff"
+
+msgid "Precedente"
+msgstr "Previous"
+
+msgid "Premi per campagne di incentivazione: catalogo su misura, raccolta ordini e spedizione diretta a ogni destinatario."
+msgstr "Rewards for incentive campaigns: tailored catalogue, order collection and direct delivery to every recipient."
+
+msgid "Prenota la call"
+msgstr "Book the call"
+
+msgid "Prenota la call di 30'"
+msgstr "Book the 30' call"
+
+msgid "Prenota una call"
+msgstr "Book a call"
+
+msgid "Prenota una call di 30 minuti"
+msgstr "Book a 30-minute call"
+
+msgid "Prenota una call di 30'"
+msgstr "Book a 30' call"
+
+msgid "Prenota una call gratuita di 30 minuti con il nostro team."
+msgstr "Book a free 30-minute call with our team."
+
+msgid "Prenota una call gratuita di 30 minuti e scopri come possiamo aiutare il tuo brand a crescere sui marketplace europei."
+msgstr "Book a free 30-minute call and find out how we can help your brand grow across European marketplaces."
+
+msgid "Primary"
+msgstr "Primary"
+
+msgid "Primary Menu"
+msgstr "Primary Menu"
+
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
+msgid "Produttori e PMI"
+msgstr "Manufacturers &amp; SMEs"
+
+msgid "Retailer & Distributori"
+msgstr "Retailers &amp; Distributors"
+
+msgid "Richiedi informazioni"
+msgstr "Request information"
+
+msgid "Riduzione fino all'80% del carico operativo interno."
+msgstr "Cut internal operational load by up to 80%."
+
+msgid "Rischio blocco account / compliance"
+msgstr "Account suspension / compliance risk"
+
+msgid "Risposta entro 24 ore lavorative"
+msgstr "Reply within 24 business hours"
+
+msgid "Scopri come lavoriamo su %s."
+msgstr "Find out how we work on %s."
+
+msgid "Scopri di pi&ugrave;"
+msgstr "Learn more"
+
+msgid "Scopri i servizi"
+msgstr "Explore our services"
+
+msgid "Scopri il servizio"
+msgstr "Explore the service"
+
+msgid "Servizi"
+msgstr "Services"
+
+msgid "Servizio correlato"
+msgstr "Related service"
+
+msgid "Si sono affidati a noi."
+msgstr "Brands that trust us."
+
+msgid "Spedizioni Amazon Prime"
+msgstr "Amazon Prime shipping"
+
+msgid "Successivo"
+msgstr "Next"
+
+msgid "Toggle menu"
+msgstr "Toggle menu"
+
+msgid "Torna alla home"
+msgstr "Back to home"
+
+msgid "Tutti i diritti riservati."
+msgstr "All rights reserved."
+
+msgid "Un ecosistema completo per il tuo ecommerce."
+msgstr "A complete ecosystem for your ecommerce."
+
+msgid "Un unico brand, ovunque siano i tuoi clienti."
+msgstr "One brand, wherever your customers are."
+
+msgid "Valutiamo insieme l'opportunit&agrave; di crescita."
+msgstr "Let's assess the growth opportunity together."
+
+msgid "Valutiamo insieme se esiste un'opportunit&agrave; reale per il tuo brand. Senza impegno, solo numeri chiari."
+msgstr "Let's see together whether there's a real opportunity for your brand. No commitment, just clear numbers."
+
+msgid "Vantaggi"
+msgstr "Benefits"
+
+msgid "Vedi tutti"
+msgstr "View all"
+
+msgid "Vendiamo per tuo conto come entit&agrave; fiscale. Gestiamo IVA, fatturazione e compliance in ogni paese europeo."
+msgstr "We sell on your behalf as the legal seller of record. We handle VAT, invoicing and compliance in every European country."
+
+msgid "Vendiamo sui principali marketplace europei"
+msgstr "We sell on Europe's leading marketplaces"
+
+msgid "Voce"
+msgstr "Item"
+
+msgid "Vuoi far crescere il tuo brand sui marketplace?"
+msgstr "Want to grow your brand on marketplaces?"
+
+msgid "Vuoi saperne di pi&ugrave;?"
+msgstr "Want to know more?"
+
+msgid "effectively simple."
+msgstr "effectively simple."
+

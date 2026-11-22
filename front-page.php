@@ -13,14 +13,14 @@ get_header();
 <!-- 1. HERO -->
 <section class="b2v-hero" id="hero">
 	<div class="b2v-container b2v-hero__inner">
-		<div class="b2v-hero__badge">
-			<?php esc_html_e('E-commerce Service Provider, Full Outsourcing Multicanale', 'b2vibe'); ?>
-		</div>
+		<h1 class="b2v-hero__badge">
+			<?php esc_html_e('Ecommerce multicanale, logistica, fiscalit&agrave; e customer care', 'b2vibe'); ?>
+		</h1>
 
-		<h1>
+		<p class="b2v-hero__title">
 			<span data-scramble="<?php esc_attr_e('Making sales', 'b2vibe'); ?>"><?php esc_html_e('Making sales', 'b2vibe'); ?></span>
 			<br><span class="b2v-accent" data-scramble="<?php esc_attr_e('effectively simple.', 'b2vibe'); ?>"><?php esc_html_e('effectively simple.', 'b2vibe'); ?></span>
-		</h1>
+		</p>
 
 		<p class="b2v-hero__sub">
 			<?php esc_html_e('Nati da 15+ anni di esperienza Yeppon e oltre 1 milione di ordini spediti in Europa. Oggi mettiamo questa competenza al servizio del tuo brand, gestendo ecommerce multicanale, logistica, fiscalit&agrave; e customer care.', 'b2vibe'); ?>
@@ -272,7 +272,28 @@ get_header();
 	</div>
 </section>
 
-<!-- 8. ULTIMI ARTICOLI -->
+<!-- 8. MARKETPLACE -->
+<?php
+$marketplace_pages = b2vibe_get_marketplace_pages();
+if ($marketplace_pages !== []) :
+?>
+<section class="b2v-section b2v-marketplace b2v-section--alt" id="marketplace">
+	<div class="b2v-container">
+		<span class="b2v-label"><?php esc_html_e('Marketplace', 'b2vibe'); ?></span>
+		<h2><?php esc_html_e('Vendiamo sui principali marketplace europei', 'b2vibe'); ?></h2>
+		<div class="b2v-marketplace__grid">
+			<?php foreach ($marketplace_pages as $mp) : ?>
+			<a class="b2v-card b2v-marketplace__card" href="<?php echo esc_url(get_permalink($mp)); ?>">
+				<h3><?php echo esc_html(get_the_title($mp)); ?></h3>
+				<span class="b2v-marketplace__link"><?php esc_html_e('Scopri di pi&ugrave;', 'b2vibe'); ?> &rarr;</span>
+			</a>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+<?php endif; ?>
+
+<!-- 9. ULTIMI ARTICOLI -->
 <?php
 $latest_posts = new WP_Query([
 	'posts_per_page' => 3,
@@ -323,7 +344,7 @@ wp_reset_postdata();
 endif;
 ?>
 
-<!-- 9. CTA FINALE -->
+<!-- 10. CTA FINALE -->
 <section class="b2v-cta-final" id="cta">
 	<div class="b2v-container">
 		<div class="b2v-card b2v-cta-final__card">
