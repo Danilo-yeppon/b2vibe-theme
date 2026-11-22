@@ -6,7 +6,9 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-define('B2VIBE_VERSION', '1.8.3');
+define('B2VIBE_VERSION', '1.9.0');
+
+require_once __DIR__ . '/inc/antispam.php';
 
 function b2vibe_setup(): void
 {
